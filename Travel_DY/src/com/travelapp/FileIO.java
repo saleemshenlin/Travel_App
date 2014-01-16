@@ -26,6 +26,7 @@ public class FileIO {
 	public void getDateFromXML() {
 		Context mContext = TravelApplication.getContext();
 		Resources mResources = mContext.getResources();
+
 		XmlResourceParser mXmlResourceParser = mResources.getXml(R.xml.data);
 		int intEventType;
 		StringBuffer mStringBuffer = new StringBuffer();
@@ -65,23 +66,23 @@ public class FileIO {
 							.trim();
 					mStringBuffer.append(mXmlResourceParser.getText()
 							.toString().trim());
-					if (strRowName.equals("Id")) {
+					if (strRowName.equals("id")) {
 						mContentValues.put(PoiDB.C_ID, tagText);
-					} else if (strRowName.equals("Name")) {
+					} else if (strRowName.equals("name")) {
 						mContentValues.put(PoiDB.C_NAME, tagText);
-					} else if (strRowName.equals("D_Name")) {
+					} else if (strRowName.equals("d_name")) {
 						mContentValues.put(PoiDB.C_D_NAME, tagText);
-					} else if (strRowName.equals("Address")) {
+					} else if (strRowName.equals("address")) {
 						mContentValues.put(PoiDB.C_ADDRESS, tagText);
-					} else if (strRowName.equals("Time")) {
+					} else if (strRowName.equals("time")) {
 						mContentValues.put(PoiDB.C_TIME, tagText);
-					} else if (strRowName.equals("Ticket")) {
+					} else if (strRowName.equals("ticket")) {
 						mContentValues.put(PoiDB.C_PRICE, tagText);
-					} else if (strRowName.equals("Type")) {
+					} else if (strRowName.equals("type")) {
 						mContentValues.put(PoiDB.C_TYPE, tagText);
-					} else if (strRowName.equals("Tele")) {
+					} else if (strRowName.equals("tele")) {
 						mContentValues.put(PoiDB.C_TELE, tagText);
-					} else if (strRowName.equals("Abstract")) {
+					} else if (strRowName.equals("abstract")) {
 						mContentValues.put(PoiDB.C_ABSTRACT, tagText);
 					}
 				}
