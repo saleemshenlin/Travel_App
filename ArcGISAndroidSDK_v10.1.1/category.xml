@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.esri.arcgis.android.core.feature_10.1.1.201301161115.jar" id="com.esri.arcgis.android.core.feature" version="10.1.1.201301161115">
+      <category name="AGSAndroid"/>
+   </feature>
+   <feature url="features/com.esri.arcgis.android.sdk.feature_10.1.1.201301161115.jar" id="com.esri.arcgis.android.sdk.feature" version="10.1.1.201301161115">
+      <category name="AGSAndroid"/>
+   </feature>
+   <category-def name="AGSAndroid" label="ArcGIS for Android">
+      <description>
+         ArcGIS for Android
+      </description>
+   </category-def>
+</site>

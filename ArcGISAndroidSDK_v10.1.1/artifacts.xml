@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='ArcGIS Android' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1358363835664'/>
+    <property name='p2.compressed' value='false'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='5'>
+    <artifact classifier='osgi.bundle' id='com.esri.arcgis.android.doc' version='10.1.1.201301161115'>
+      <properties size='3'>
+        <property name='artifact.size' value='3923796'/>
+        <property name='download.size' value='3923796'/>
+        <property name='download.md5' value='ebabc8dd500646edbf73fb799aeba9cb'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='com.esri.arcgis.android.core.feature' version='10.1.1.201301161115'>
+      <properties size='4'>
+        <property name='artifact.size' value='67521'/>
+        <property name='download.size' value='67521'/>
+        <property name='download.md5' value='bf9c0be0e92e312618f12c0a3e7333ca'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='com.esri.arcgis.android.sdk.feature' version='10.1.1.201301161115'>
+      <properties size='4'>
+        <property name='artifact.size' value='67567'/>
+        <property name='download.size' value='67567'/>
+        <property name='download.md5' value='09aa38a83ea35ac04595d9f2080947f6'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.esri.arcgis.android.samples' version='10.1.1.201301161115'>
+      <properties size='3'>
+        <property name='artifact.size' value='3426413'/>
+        <property name='download.size' value='3426413'/>
+        <property name='download.md5' value='208d8aa10ac27893ef725180c6444216'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.esri.arcgis.android.core' version='10.1.1.201301161115'>
+      <properties size='3'>
+        <property name='artifact.size' value='10173893'/>
+        <property name='download.size' value='10173893'/>
+        <property name='download.md5' value='d1b7a1249c18e869b95842f3a3c54b7c'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>
