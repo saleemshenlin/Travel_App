@@ -35,7 +35,7 @@ public class HomeActivity extends Activity {
 				HomeActivity.this.startActivity(intent);
 				HomeActivity.this.finish();
 				HomeActivity.this.overridePendingTransition(
-						R.anim.anim_in_right2left, R.anim.anim_out_left2right);
+						R.anim.anim_in_right2left, R.anim.anim_out_right2left);
 			}
 		});
 		mScenicImageView.setOnClickListener(new View.OnClickListener() {

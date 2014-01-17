@@ -98,12 +98,12 @@ public final class R {
         public static final int imgItemRoute=0x7f0a000c;
         public static final int imgItemScenic=0x7f0a0007;
         public static final int imgItemSocial=0x7f0a000d;
-        public static final int imgListBack=0x7f0a0010;
+        public static final int imgListBack=0x7f0a000f;
         public static final int imgListMap=0x7f0a0012;
         public static final int imgPalce=0x7f0a0015;
-        public static final int linActionbar=0x7f0a000f;
+        public static final int linActionbar=0x7f0a000e;
         public static final int listPoi=0x7f0a0013;
-        public static final int map=0x7f0a000e;
+        public static final int map=0x7f0a0010;
         public static final int prbLoadData=0x7f0a0014;
         public static final int relDown=0x7f0a0004;
         public static final int relHomeView=0x7f0a0000;

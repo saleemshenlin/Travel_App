@@ -40,6 +40,7 @@ public class TravelApplication extends Application {
 		return mPoiDB;
 	}
 
+
 	/**
 	 * 创建LbsApplication<br>
 	 * 1)获取上下文,赋值个CONTEXT<br>
