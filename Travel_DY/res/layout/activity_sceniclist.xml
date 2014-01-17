@@ -21,11 +21,11 @@
         <TextView
             android:id="@+id/txtListTitle"
             android:layout_width="0dip"
-            android:layout_height="48dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:paddingRight="4dp"
-            android:paddingTop="4dp"
             android:text="@string/txtHomePlace"
             android:textColor="#ffffffff"
             android:textSize="22sp"
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listPoi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>

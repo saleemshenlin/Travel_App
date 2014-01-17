@@ -84,6 +84,8 @@ public class FileIO {
 						mContentValues.put(PoiDB.C_TELE, tagText);
 					} else if (strRowName.equals("abstract")) {
 						mContentValues.put(PoiDB.C_ABSTRACT, tagText);
+					} else if (strRowName.equals("c_id")) {
+						mContentValues.put(PoiDB.C_C_ID, tagText);
 					}
 				}
 				intEventType = mXmlResourceParser.next();

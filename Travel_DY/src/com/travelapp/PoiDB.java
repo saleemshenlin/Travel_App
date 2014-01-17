@@ -37,6 +37,7 @@ public class PoiDB {
 	static final String C_TELE = "_tele";
 	static final String C_TYPE = "_type";
 	static final String C_ABSTRACT = "_absrtact";
+	static final String C_C_ID = "_c_id";
 
 	/**
 	 * ¿‡DbHelper<br>
@@ -65,10 +66,10 @@ public class PoiDB {
 			Log.i(TAG, "Creating database: " + DATABASE);
 			db.execSQL("create TABLE " + TABLE + "(" + C_ID
 					+ " INTEGER PRIMARY KEY," + C_NAME + " VARCHAR(128),"
-					+ C_D_NAME + " VARCHAR(128)," + C_ADDRESS
-					+ " VARCHAR(128)," + C_TIME + " VARCHAR(50)," + C_TYPE
-					+ " VARCHAR(50)," + C_TELE + " VARCHAR(128)," + C_PRICE
-					+ " VARCHAR(128)," + C_ABSTRACT + " TEXT)");
+					+ C_D_NAME + " VARCHAR(128)," + C_C_ID + " VARCHAR(10),"
+					+ C_ADDRESS + " VARCHAR(128)," + C_TIME + " VARCHAR(50),"
+					+ C_TYPE + " VARCHAR(50)," + C_TELE + " VARCHAR(128),"
+					+ C_PRICE + " VARCHAR(128)," + C_ABSTRACT + " TEXT)");
 		}
 
 		/**
