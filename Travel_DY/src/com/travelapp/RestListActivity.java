@@ -82,7 +82,7 @@ public class RestListActivity extends Activity {
 				RestListActivity.this.startActivity(intent);
 				RestListActivity.this.finish();
 				RestListActivity.this.overridePendingTransition(
-						R.anim.anim_out_left2right, R.anim.anim_in_right2left);
+						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
 	}
@@ -138,7 +138,7 @@ public class RestListActivity extends Activity {
 				String title = cursor.getString(columnIndex);
 				if (title.length() > 10) {
 					String name = title.substring(0, 10);
-					((TextView) view).setText(name);
+					((TextView) view).setText(name + "...");
 				} else {
 					String name = title;
 					((TextView) view).setText(name);

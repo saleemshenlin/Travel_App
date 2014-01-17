@@ -82,7 +82,7 @@ public class ScenicListActivity extends Activity {
 				ScenicListActivity.this.startActivity(intent);
 				ScenicListActivity.this.finish();
 				ScenicListActivity.this.overridePendingTransition(
-						R.anim.anim_out_left2right, R.anim.anim_in_right2left);
+						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
 	}

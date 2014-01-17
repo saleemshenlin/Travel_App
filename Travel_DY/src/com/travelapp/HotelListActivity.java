@@ -82,7 +82,7 @@ public class HotelListActivity extends Activity {
 				HotelListActivity.this.startActivity(intent);
 				HotelListActivity.this.finish();
 				HotelListActivity.this.overridePendingTransition(
-						R.anim.anim_out_left2right, R.anim.anim_in_right2left);
+						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
 	}
