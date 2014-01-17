@@ -16,7 +16,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ScenicListActivity extends Activity {
 	ImageView mBackImageView;
@@ -40,7 +39,7 @@ public class ScenicListActivity extends Activity {
 	 * C_NAME,C_LOCATION,C_DATE
 	 */
 	private final String[] FROM = { PoiDB.C_NAME, PoiDB.C_PRICE,
-			PoiDB.C_ABSTRACT, PoiDB.C_C_ID };
+			PoiDB.C_ABSTRACT, PoiDB.C_ID };
 	/**
 	 * 定义一个int[],对应row.xml中的控件id,分别映射FROM中的元素
 	 */
@@ -108,10 +107,6 @@ public class ScenicListActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					// mQuery.initPopupwindows(getActivity(), rootView, id,
-					// !EventListActivity.isFromWidget);
-					Toast.makeText(ScenicListActivity.this, "test",
-							Toast.LENGTH_LONG);
 
 				}
 			});
@@ -139,9 +134,19 @@ public class ScenicListActivity extends Activity {
 				String date = cursor.getString(columnIndex);
 				((TextView) view).setText("门票：" + date);
 				return true;
+			} else if (view.getId() == R.id.txtRowTitle) {
+				String title = cursor.getString(columnIndex);
+				if (title.length() > 10) {
+					String name = title.substring(0, 10);
+					((TextView) view).setText(name+"...");
+				} else {
+					String name = title;
+					((TextView) view).setText(name);
+				}
+				return true;
 			} else if (view.getId() == R.id.txtRowAbstract) {
-				String place = cursor.getString(columnIndex);
-				((TextView) view).setText(place);
+				String place = cursor.getString(columnIndex).substring(0, 30);
+				((TextView) view).setText(place + "...");
 				return true;
 			} else if (view.getId() == R.id.imgPalce) {
 				String name = "img_0" + cursor.getString(columnIndex);
@@ -157,4 +162,5 @@ public class ScenicListActivity extends Activity {
 		}
 
 	};
+
 }

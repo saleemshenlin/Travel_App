@@ -40,10 +40,15 @@
             android:src="@drawable/ic_action_map" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listPoi"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>
+
+        <ListView
+            android:id="@+id/listPoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </RelativeLayout>
 
 </LinearLayout>
