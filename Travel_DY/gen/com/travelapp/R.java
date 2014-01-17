@@ -29,20 +29,27 @@ public final class R {
     }
     public static final class drawable {
         public static final int bg_home=0x7f020000;
-        public static final int bg_welcome=0x7f020001;
-        public static final int ic_itemaround=0x7f020002;
-        public static final int ic_itemfun=0x7f020003;
-        public static final int ic_itemhetel=0x7f020004;
-        public static final int ic_itemhotel=0x7f020005;
-        public static final int ic_itemmap=0x7f020006;
-        public static final int ic_itemrest=0x7f020007;
-        public static final int ic_itemroute=0x7f020008;
-        public static final int ic_itemscenic=0x7f020009;
-        public static final int ic_itemsocial=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
+        public static final int bg_list=0x7f020001;
+        public static final int bg_list_repeat=0x7f020002;
+        public static final int bg_popup_detail=0x7f020003;
+        public static final int bg_popup_photo=0x7f020004;
+        public static final int bg_welcome=0x7f020005;
+        public static final int ic_action_back_light=0x7f020006;
+        public static final int ic_action_map=0x7f020007;
+        public static final int ic_itemaround=0x7f020008;
+        public static final int ic_itemfun=0x7f020009;
+        public static final int ic_itemhetel=0x7f02000a;
+        public static final int ic_itemhotel=0x7f02000b;
+        public static final int ic_itemmap=0x7f02000c;
+        public static final int ic_itemrest=0x7f02000d;
+        public static final int ic_itemroute=0x7f02000e;
+        public static final int ic_itemscenic=0x7f02000f;
+        public static final int ic_itemsocial=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int one10001=0x7f020012;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0010;
+        public static final int action_settings=0x7f0a0019;
         public static final int gridHome=0x7f0a0005;
         public static final int imgItemAround=0x7f0a000b;
         public static final int imgItemFun=0x7f0a000a;
@@ -52,19 +59,29 @@ public final class R {
         public static final int imgItemRoute=0x7f0a000c;
         public static final int imgItemScenic=0x7f0a0007;
         public static final int imgItemSocial=0x7f0a000d;
+        public static final int imgListBack=0x7f0a0010;
+        public static final int imgListMap=0x7f0a0012;
+        public static final int imgPalce=0x7f0a0015;
+        public static final int linActionbar=0x7f0a000f;
+        public static final int listView1=0x7f0a0013;
         public static final int map=0x7f0a000e;
-        public static final int prbLoadData=0x7f0a000f;
+        public static final int prbLoadData=0x7f0a0014;
         public static final int relDown=0x7f0a0004;
         public static final int relHomeView=0x7f0a0000;
         public static final int relUp=0x7f0a0001;
+        public static final int txtDateTime=0x7f0a0017;
         public static final int txtHomePlace=0x7f0a0002;
         public static final int txtHomeTitle=0x7f0a0003;
+        public static final int txtListTitle=0x7f0a0011;
+        public static final int txtLocation=0x7f0a0018;
+        public static final int txtTitle=0x7f0a0016;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
         public static final int activity_map=0x7f030001;
         public static final int activity_sceniclist=0x7f030002;
         public static final int activity_splash=0x7f030003;
+        public static final int row=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -81,11 +98,17 @@ public final class R {
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
+
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
+
 
         
 
@@ -102,9 +125,9 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int customActionBarStyle=0x7f080003;
         public static final int splashTheme=0x7f080002;
     }
     public static final class xml {

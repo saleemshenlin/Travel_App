@@ -16,6 +16,9 @@ public class ScenicListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sceniclist);
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setTitle("æ∞µ„¡–±Ì");
+		mActionBar.setIcon(R.drawable.ic_action_back_light);
+		mActionBar.setLogo(R.drawable.ic_action_back_light);
 	}
 
 	@Override

@@ -3,6 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <LinearLayout
+        android:id="@+id/linActionbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
+        android:background="#33B5E5" >
+
+        <ImageView
+            android:id="@+id/imgListBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_action_back_light" />
+
+        <TextView
+            android:id="@+id/txtListTitle"
+            android:layout_width="0dip"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
+            android:text="@string/txtHomePlace"
+            android:textColor="#ffffffff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgListMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="8dp"
+            android:src="@drawable/ic_action_map" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
