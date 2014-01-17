@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -22,6 +23,7 @@ public class ScenicListActivity extends Activity {
 	ImageView mBackImageView;
 	TextView mTitleTextView;
 	ImageView mMapImageView;
+	Cursor mItemCursor = null;
 	static Resources mResources;
 	/**
 	 * 定义一个标签,在LogCat内表示EventListFragment
@@ -40,7 +42,7 @@ public class ScenicListActivity extends Activity {
 	 * C_NAME,C_LOCATION,C_DATE
 	 */
 	private final String[] FROM = { PoiDB.C_NAME, PoiDB.C_PRICE,
-			PoiDB.C_ABSTRACT, PoiDB.C_C_ID };
+			PoiDB.C_ABSTRACT, PoiDB.C_ID };
 	/**
 	 * 定义一个int[],对应row.xml中的控件id,分别映射FROM中的元素
 	 */
@@ -62,7 +64,7 @@ public class ScenicListActivity extends Activity {
 		setContentView(R.layout.activity_sceniclist);
 		mResources = this.getResources();
 		initView();
-		queryData();
+		new PoiQuery().execute();
 	}
 
 	private void initView() {
@@ -83,46 +85,9 @@ public class ScenicListActivity extends Activity {
 				ScenicListActivity.this.startActivity(intent);
 				ScenicListActivity.this.finish();
 				ScenicListActivity.this.overridePendingTransition(
-						R.anim.anim_out_left2right, R.anim.anim_in_right2left);
+						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
-	}
-
-	private void queryData() {
-		Cursor mItemCursor = null;
-		mPoiProvider = new PoiProvider();
-		mQuery = new Query();
-		try {
-			mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
-					mQuery.getSectionViaType(1), null,
-					mQuery.getSortOrder(PoiDB.C_ID));
-			int num = mItemCursor.getCount();
-			Log.i(TAG, "ActivityProvider cursor" + num);
-			mSimpleCursorAdapter = new SimpleCursorAdapter(
-					TravelApplication.getContext(), R.layout.row, mItemCursor,
-					FROM, TO, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-			mSimpleCursorAdapter.setViewBinder(LIST_VIEW_BINDER);
-			mPoiListView.setAdapter(mSimpleCursorAdapter);
-			mPoiListView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// mQuery.initPopupwindows(getActivity(), rootView, id,
-					// !EventListActivity.isFromWidget);
-					Toast.makeText(ScenicListActivity.this, "test",
-							Toast.LENGTH_LONG);
-
-				}
-			});
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		} finally {
-			if (mItemCursor.isClosed()) {
-				mItemCursor.close();
-			}
-			TravelApplication.getPoiDB().closeDatabase();
-		}
 	}
 
 	/**
@@ -139,9 +104,19 @@ public class ScenicListActivity extends Activity {
 				String date = cursor.getString(columnIndex);
 				((TextView) view).setText("门票：" + date);
 				return true;
+			} else if (view.getId() == R.id.txtRowTitle) {
+				String title = cursor.getString(columnIndex);
+				if (title.length() > 10) {
+					String name = title.substring(0, 10);
+					((TextView) view).setText(name + "...");
+				} else {
+					String name = title;
+					((TextView) view).setText(name);
+				}
+				return true;
 			} else if (view.getId() == R.id.txtRowAbstract) {
-				String place = cursor.getString(columnIndex);
-				((TextView) view).setText(place);
+				String place = cursor.getString(columnIndex).substring(0, 30);
+				((TextView) view).setText(place + "...");
 				return true;
 			} else if (view.getId() == R.id.imgPalce) {
 				String name = "img_0" + cursor.getString(columnIndex);
@@ -157,4 +132,58 @@ public class ScenicListActivity extends Activity {
 		}
 
 	};
+
+	class PoiQuery extends AsyncTask<String[], String, String> {
+
+		@Override
+		protected String doInBackground(String[]... params) {
+			// TODO Auto-generated method stub
+			mPoiProvider = new PoiProvider();
+			mQuery = new Query();
+			try {
+				mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
+						mQuery.getSectionViaType(1), null,
+						mQuery.getSortOrder(PoiDB.C_ID));
+				int num = mItemCursor.getCount();
+				Log.i(TAG, "ActivityProvider cursor" + num);
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+			} finally {
+				if (mItemCursor.isClosed()) {
+					mItemCursor.close();
+				}
+				TravelApplication.getPoiDB().closeDatabase();
+			}
+			return "ok";
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result != null) {
+				Toast.makeText(ScenicListActivity.this, "成功获取数据",
+						Toast.LENGTH_LONG).show();
+				mSimpleCursorAdapter = new SimpleCursorAdapter(
+						TravelApplication.getContext(), R.layout.row,
+						mItemCursor, FROM, TO,
+						CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				mSimpleCursorAdapter.setViewBinder(LIST_VIEW_BINDER);
+				mPoiListView.setAdapter(mSimpleCursorAdapter);
+				mPoiListView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+
+					}
+				});
+			} else {
+				Toast.makeText(ScenicListActivity.this, "获取数据失败",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+
+	}
+
 }
