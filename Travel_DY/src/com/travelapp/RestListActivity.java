@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class RestListActivity extends Activity {
@@ -22,6 +24,7 @@ public class RestListActivity extends Activity {
 	TextView mTitleTextView;
 	ImageView mMapImageView;
 	static Resources mResources;
+	Cursor mItemCursor = null;
 	/**
 	 * 定义一个标签,在LogCat内表示EventListFragment
 	 */
@@ -61,7 +64,7 @@ public class RestListActivity extends Activity {
 		setContentView(R.layout.activity_sceniclist);
 		mResources = this.getResources();
 		initView();
-		queryData();
+		new PoiQuery().execute();
 	}
 
 	private void initView() {
@@ -85,39 +88,6 @@ public class RestListActivity extends Activity {
 						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
-	}
-
-	private void queryData() {
-		Cursor mItemCursor = null;
-		mPoiProvider = new PoiProvider();
-		mQuery = new Query();
-		try {
-			mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
-					mQuery.getSectionViaType(3), null,
-					mQuery.getSortOrder(PoiDB.C_ID));
-			int num = mItemCursor.getCount();
-			Log.i(TAG, "ActivityProvider cursor" + num);
-			mSimpleCursorAdapter = new SimpleCursorAdapter(
-					TravelApplication.getContext(), R.layout.row, mItemCursor,
-					FROM, TO, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-			mSimpleCursorAdapter.setViewBinder(LIST_VIEW_BINDER);
-			mPoiListView.setAdapter(mSimpleCursorAdapter);
-			mPoiListView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-
-				}
-			});
-		} catch (Exception e) {
-			Log.e(TAG, e.toString());
-		} finally {
-			if (mItemCursor.isClosed()) {
-				mItemCursor.close();
-			}
-			TravelApplication.getPoiDB().closeDatabase();
-		}
 	}
 
 	/**
@@ -162,4 +132,57 @@ public class RestListActivity extends Activity {
 		}
 
 	};
+
+	class PoiQuery extends AsyncTask<String[], String, String> {
+
+		@Override
+		protected String doInBackground(String[]... params) {
+			// TODO Auto-generated method stub
+			mPoiProvider = new PoiProvider();
+			mQuery = new Query();
+			try {
+				mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
+						mQuery.getSectionViaType(3), null,
+						mQuery.getSortOrder(PoiDB.C_ID));
+				int num = mItemCursor.getCount();
+				Log.i(TAG, "ActivityProvider cursor" + num);
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+			} finally {
+				if (mItemCursor.isClosed()) {
+					mItemCursor.close();
+				}
+				TravelApplication.getPoiDB().closeDatabase();
+			}
+			return "ok";
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result != null) {
+				Toast.makeText(RestListActivity.this, "成功获取数据",
+						Toast.LENGTH_LONG).show();
+				mSimpleCursorAdapter = new SimpleCursorAdapter(
+						TravelApplication.getContext(), R.layout.row,
+						mItemCursor, FROM, TO,
+						CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				mSimpleCursorAdapter.setViewBinder(LIST_VIEW_BINDER);
+				mPoiListView.setAdapter(mSimpleCursorAdapter);
+				mPoiListView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+
+					}
+				});
+			} else {
+				Toast.makeText(RestListActivity.this, "获取数据失败",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+
+	}
 }
