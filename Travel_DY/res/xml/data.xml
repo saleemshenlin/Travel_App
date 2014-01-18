@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<alldata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Alldata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<poi>
 		<c_id>01</c_id>
 		<id>0101</id>
@@ -430,4 +430,4 @@
 		<time>10:00-22:00</time>
 		<abstract>大庆银座尚品购物中心由实力卓越的黑龙江顺峰房地产开发有限公司大庆巨鹰房地产开发有限公司联袂实力打造。雄踞东城商业中心，坐拥新玛特高档潜力商圈，汇聚中央政务区、中央商务区、中央金融区、中央文化区、中央居住区滚滚人潮，以万平米顶级商业宝地，填补大庆高中档主题购物的经营空白，尽显商贾云集之势。购物中心内设流行名品馆和时尚综合馆，经营精品女装、少淑装、珠宝翡翠、名表眼睛、皮草、品牌男装、精品皮具、韩流服装、化妆品、时尚饰品、餐饮休闲等业态、以引领时尚消费为理念，汇聚国内外知名时尚品牌，全情呈现大庆流主题购物空间。</abstract>
 	</poi>
-</alldata>
+</Alldata>

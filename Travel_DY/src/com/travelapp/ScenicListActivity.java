@@ -61,7 +61,7 @@ public class ScenicListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sceniclist);
+		setContentView(R.layout.activity_list);
 		mResources = this.getResources();
 		initView();
 		new PoiQuery().execute();
@@ -175,12 +175,21 @@ public class ScenicListActivity extends Activity {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-
+						Intent intent = new Intent(ScenicListActivity.this,
+								ScenicDetailActivity.class);
+						intent.putExtra("ID", id);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+								| Intent.FLAG_ACTIVITY_NEW_TASK);
+						ScenicListActivity.this.startActivity(intent);
+						ScenicListActivity.this.finish();
+						ScenicListActivity.this.overridePendingTransition(
+								R.anim.anim_in_right2left,
+								R.anim.anim_out_right2left);
 					}
 				});
 			} else {
 				Toast.makeText(ScenicListActivity.this, "获取数据失败",
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_SHORT).show();
 			}
 		}
 

@@ -61,7 +61,7 @@ public class HotelListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_sceniclist);
+		setContentView(R.layout.activity_list);
 		mResources = this.getResources();
 		initView();
 		new PoiQuery().execute();
@@ -175,7 +175,16 @@ public class HotelListActivity extends Activity {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-
+						Intent intent = new Intent(HotelListActivity.this,
+								HotelDetailActivity.class);
+						intent.putExtra("ID", id);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+								| Intent.FLAG_ACTIVITY_NEW_TASK);
+						HotelListActivity.this.startActivity(intent);
+						HotelListActivity.this.finish();
+						HotelListActivity.this.overridePendingTransition(
+								R.anim.anim_in_right2left,
+								R.anim.anim_out_right2left);
 					}
 				});
 			} else {
@@ -183,6 +192,5 @@ public class HotelListActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 		}
-
 	}
 }

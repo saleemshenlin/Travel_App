@@ -18,10 +18,10 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		InitView();
+		initView();
 	}
 
-	private void InitView() {
+	private void initView() {
 		mMapImageView = (ImageView) findViewById(R.id.imgItemMap);
 		mScenicImageView = (ImageView) findViewById(R.id.imgItemScenic);
 		mHotelImageView = (ImageView) findViewById(R.id.imgItemHotel);
