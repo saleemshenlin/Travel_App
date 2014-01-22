@@ -3,22 +3,28 @@ package com.travelapp;
 import android.R.color;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
+import com.esri.android.map.ags.ArcGISFeatureLayer;
 import com.esri.android.map.ags.ArcGISLocalTiledLayer;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
 import com.esri.android.map.event.OnZoomListener;
 import com.esri.core.geometry.Envelope;
+import com.esri.core.symbol.SimpleMarkerSymbol;
+import com.esri.core.symbol.SimpleMarkerSymbol.STYLE;
 
 public class MapActivity extends Activity {
 	ImageView mBackImageView;
 	MapView mMap = null;
-
+	Query mQuery;
+	GraphicsLayer mGraphicsLayer;
 	ArcGISLocalTiledLayer mLocalTiledLayer;
 	ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
 	String url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer";
@@ -35,6 +41,7 @@ public class MapActivity extends Activity {
 	private void initView() {
 		mBackImageView = (ImageView) findViewById(R.id.imgListBack);
 		mMap = (MapView) findViewById(R.id.map);
+		mGraphicsLayer = new GraphicsLayer();
 		mBackImageView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -49,6 +56,15 @@ public class MapActivity extends Activity {
 						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
 			}
 		});
+	}
+
+	public GraphicsLayer addGraphicToLayer() {
+		GraphicsLayer mLayer = new GraphicsLayer();
+		// create a simple marker symbol to be used by our graphic
+		mQuery = new Query();
+		mLayer = mQuery.getPois();
+		return mLayer;
+
 	}
 
 	@Override
@@ -97,6 +113,8 @@ public class MapActivity extends Activity {
 			});
 			mMap.addLayer(mTiledMapServiceLayer);
 			mMap.addLayer(mLocalTiledLayer);
+			addGraphicToLayer();
+			mMap.addLayer(mGraphicsLayer);
 			return "ok";
 		}
 
@@ -112,4 +130,5 @@ public class MapActivity extends Activity {
 
 		}
 	}
+
 }

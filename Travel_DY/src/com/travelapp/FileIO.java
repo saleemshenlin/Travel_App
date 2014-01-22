@@ -1,14 +1,30 @@
 package com.travelapp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.R.integer;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
+
+import com.esri.core.geometry.Envelope;
+import com.esri.core.geometry.Geometry;
+import com.esri.core.geometry.MultiPath;
+import com.esri.core.geometry.Point;
+import com.esri.core.map.FeatureSet;
+import com.esri.core.map.Graphic;
 
 public class FileIO {
 	/**
@@ -54,7 +70,7 @@ public class FileIO {
 						mStringBuffer.append(")");
 						Log.d(TAG, mStringBuffer.toString());
 						TravelApplication.getPoiDB().insertOrIgnore(
-								mContentValues);
+								mContentValues, PoiDB.TABLE);
 						mStringBuffer.delete(0, mStringBuffer.length() - 1);
 					} else if (tagName.equals("Alldata")) {
 						Log.d(TAG, "end");
@@ -98,5 +114,149 @@ public class FileIO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void copyJSON(Context context) {
+		createPath(context, "data");
+		AssetManager mAssetManager = context.getAssets();
+		String[] files = null;
+		try {
+			files = mAssetManager.list("");
+		} catch (IOException e) {
+			Log.e(TAG, e.toString());
+		}
+		for (String filename : files) {
+
+			InputStream in = null;
+			OutputStream out = null;
+			try {
+				if (filename.equals("poi.json")
+						|| filename.equals("route.json")) {
+					in = mAssetManager.open(filename);
+					File outFile = null;
+					outFile = new File(context.getExternalFilesDir("data"),
+							filename);
+					if (!outFile.exists()) {
+						out = new FileOutputStream(outFile);
+						copyFile(in, out);
+						in.close();
+						in = null;
+						out.flush();
+						out.close();
+						out = null;
+					}
+				}
+			} catch (IOException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+
+	}
+
+	public void jSON2WKT(Context context, String filename) {
+		File poiJson = new File(context.getExternalFilesDir("data"), filename);
+		JsonFactory mJsonFactory = new JsonFactory();
+		try {
+			System.out.println("Done!");
+			JsonParser mjJsonParser = mJsonFactory.createJsonParser(poiJson);
+			mjJsonParser.nextToken();
+			FeatureSet mFeatureSet = FeatureSet.fromJson(mjJsonParser);
+			Graphic[] mGraphics = mFeatureSet.getGraphics();
+			for (Graphic mGraphic : mGraphics) {
+				ContentValues values = new ContentValues();
+				String mID = (String) mGraphic.getAttributeValue("NewID");
+				values.put(PoiDB.C_ID, mID);
+				Geometry mGeometry = mGraphic.getGeometry();
+				String mShape = GeometryToWKT(mGeometry);
+				values.put(PoiDB.C_SHAPE, mShape);
+				if (filename.equals("poi.json")) {
+					TravelApplication.getPoiDB().insertOrIgnore(values,
+							PoiDB.TABLE_POIS);
+				} else {
+					TravelApplication.getPoiDB().insertOrIgnore(values,
+							PoiDB.TABLE_ROUTE);
+				}
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 用于文件的复制
+	 * 
+	 * @param in
+	 *            复制源
+	 * @param out
+	 *            复制目的地
+	 * @throws IOException
+	 */
+	private void copyFile(InputStream in, OutputStream out) throws IOException {
+		byte[] buffer = new byte[1024];
+		int intRead;
+		while ((intRead = in.read(buffer)) != -1) {
+			out.write(buffer, 0, intRead);
+		}
+	}
+
+	/**
+	 * 用于根据路径是否存在,创建存储路径
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param path
+	 *            创建路径
+	 */
+	private static void createPath(Context context, String path) {
+		try {
+			File mFile = new File(context.getExternalFilesDir(null), path);
+			if (!mFile.exists()) {
+				mFile.mkdir();
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+	}
+
+	public static String GeometryToWKT(Geometry geometry) {
+		if (geometry == null) {
+			return null;
+		}
+		String geoStr = "";
+		Geometry.Type type = geometry.getType();
+		if ("POINT".equals(type.name())) {
+			Point pt = (Point) geometry;
+			geoStr = type.name() + "(" + pt.getX() + " " + pt.getY() + ")";
+		} else if ("Polygon".equals(type.name())
+				|| "POLYLINE".equals(type.name())) {
+			MultiPath pg = (MultiPath) geometry;
+			geoStr = type.name() + "(" + "";
+			int pathSize = pg.getPathCount();
+			for (int j = 0; j < pathSize; j++) {
+				String temp = "(";
+				int size = pg.getPathSize(j);
+				for (int i = 0; i < size; i++) {
+					Point pt = pg.getPoint(i);
+					temp += pt.getX() + " " + pt.getY() + ",";
+				}
+				temp = temp.substring(0, temp.length() - 1) + ")";
+				geoStr += temp + ",";
+			}
+			geoStr = geoStr.substring(0, geoStr.length() - 1) + ")";
+		} else if ("Envelope".equals(type.name())) {
+			Envelope env = (Envelope) geometry;
+			geoStr = type.name() + "(" + env.getXMin() + "," + env.getYMin()
+					+ "," + env.getXMax() + "," + env.getYMax() + ")";
+		} else if ("MultiPoint".equals(type.name())) {
+		} else {
+			geoStr = null;
+		}
+		return geoStr;
 	}
 }

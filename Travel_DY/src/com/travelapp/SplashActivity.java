@@ -115,7 +115,9 @@ public class SplashActivity extends Activity {
 		protected String doInBackground(String... params) {
 			FileIO fileIO = new FileIO();
 			fileIO.getDateFromXML();
-
+			fileIO.copyJSON(TravelApplication.getContext());
+			fileIO.jSON2WKT(TravelApplication.getContext(),"poi.json");
+			fileIO.jSON2WKT(TravelApplication.getContext(),"route.json");
 			return "º”‘ÿÕÍ±œ";
 		}
 

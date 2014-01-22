@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.StaticLayout;
 import android.util.Log;
 
 public class PoiDB {
@@ -25,6 +26,8 @@ public class PoiDB {
 	 * 用于表示表名
 	 */
 	static final String TABLE = "poi";
+	static final String TABLE_POIS = "pois";
+	static final String TABLE_ROUTE = "routes";
 	/**
 	 * 字段名
 	 */
@@ -38,6 +41,7 @@ public class PoiDB {
 	static final String C_TYPE = "_type";
 	static final String C_ABSTRACT = "_absrtact";
 	static final String C_C_ID = "_c_id";
+	static final String C_SHAPE = "_shape";
 
 	/**
 	 * 类DbHelper<br>
@@ -70,6 +74,10 @@ public class PoiDB {
 					+ C_ADDRESS + " VARCHAR(128)," + C_TIME + " VARCHAR(50),"
 					+ C_TYPE + " VARCHAR(50)," + C_TELE + " VARCHAR(128),"
 					+ C_PRICE + " VARCHAR(128)," + C_ABSTRACT + " TEXT)");
+			db.execSQL("create TABLE " + TABLE_POIS + "(" + C_ID
+					+ " INTEGER PRIMARY KEY," + C_SHAPE + " TEXT)");
+			db.execSQL("create TABLE " + TABLE_ROUTE + "(" + C_ID
+					+ " INTEGER PRIMARY KEY," + C_SHAPE + " TEXT)");
 		}
 
 		/**
@@ -112,11 +120,11 @@ public class PoiDB {
 	 * @param values
 	 *            数据匹配对
 	 */
-	public void insertOrIgnore(ContentValues values) {
+	public void insertOrIgnore(ContentValues values, String table) {
 		Log.d(TAG, "insert " + values);
 		SQLiteDatabase db = this.dbHelper.getWritableDatabase();
 		try {
-			db.insertWithOnConflict(TABLE, null, values,
+			db.insertWithOnConflict(table, null, values,
 					SQLiteDatabase.CONFLICT_IGNORE);
 		} finally {
 			db.close();

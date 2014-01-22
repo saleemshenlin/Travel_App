@@ -21,7 +21,6 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="微软"
             android:text="@string/txtHomePlace"
             android:textColor="#ffffffff"
             android:textSize="22sp"
