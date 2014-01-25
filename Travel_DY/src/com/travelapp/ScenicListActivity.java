@@ -1,9 +1,17 @@
 package com.travelapp;
 
+import com.esri.android.map.GraphicsLayer;
+import com.esri.android.map.MapView;
+import com.esri.android.map.ags.ArcGISLocalTiledLayer;
+import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.event.OnZoomListener;
+import com.esri.core.geometry.Envelope;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +33,14 @@ public class ScenicListActivity extends Activity {
 	TextView mTitleTextView;
 	ImageView mMapImageView;
 	Cursor mItemCursor = null;
+	RelativeLayout mRelativeLayout;
 	static Resources mResources;
+	MapView mMap = null;
+	GraphicsLayer mGraphicsLayer;
+	ArcGISLocalTiledLayer mLocalTiledLayer;
+	ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
+	String url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer";
+	private static boolean isMap = false;
 	/**
 	 * 定义一个标签,在LogCat内表示EventListFragment
 	 */
@@ -57,6 +73,7 @@ public class ScenicListActivity extends Activity {
 	 */
 	private Query mQuery;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -65,6 +82,7 @@ public class ScenicListActivity extends Activity {
 		mResources = this.getResources();
 		initView();
 		new PoiQuery().execute();
+		new AddMap().execute();
 	}
 
 	private void initView() {
@@ -72,6 +90,10 @@ public class ScenicListActivity extends Activity {
 		mMapImageView = (ImageView) findViewById(R.id.imgListMap);
 		mTitleTextView = (TextView) findViewById(R.id.txtListTitle);
 		mPoiListView = (ListView) findViewById(R.id.listPoi);
+		mRelativeLayout = (RelativeLayout) findViewById(R.id.relMapView);
+		mRelativeLayout.setVisibility(View.GONE);
+		mMap = (MapView) findViewById(R.id.mapListView);
+		mGraphicsLayer = new GraphicsLayer();
 		mTitleTextView.setText("景点列表");
 		mBackImageView.setOnClickListener(new View.OnClickListener() {
 
@@ -86,6 +108,19 @@ public class ScenicListActivity extends Activity {
 				ScenicListActivity.this.finish();
 				ScenicListActivity.this.overridePendingTransition(
 						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
+			}
+		});
+		mMapImageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (!isMap) {
+					mRelativeLayout.setVisibility(View.VISIBLE);
+					isMap = true;
+				} else {
+					mRelativeLayout.setVisibility(View.GONE);
+					isMap = false;
+				}
 			}
 		});
 	}
@@ -193,6 +228,70 @@ public class ScenicListActivity extends Activity {
 			}
 		}
 
+	}
+
+	public GraphicsLayer addGraphicToLayer() {
+		GraphicsLayer mLayer = new GraphicsLayer();
+		// create a simple marker symbol to be used by our graphic
+		mQuery = new Query();
+		mLayer = mQuery.getPoisByType(TravelApplication.getContext(), 1);
+		return mLayer;
+
+	}
+
+	class AddMap extends AsyncTask<String, String, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			mTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(url);
+			mLocalTiledLayer = new ArcGISLocalTiledLayer(
+					"file:///mnt/sdcard/mnt/sdcard/daqingcache/Layers");
+			mMap.setExtent(new Envelope(13570407.0434979, 5681967.05272005,
+					14203165.9874021, 6017039.55107995), 0);
+			mMap.setScale(2311162.217155);
+			mMap.setMaxResolution(611.49622628138);
+			mMap.setMinResolution(9.55462853563415);
+			mMap.setOnZoomListener(new OnZoomListener() {
+
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void preAction(float pivotX, float pivotY, double factor) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void postAction(float pivotX, float pivotY, double factor) {
+					// TODO Auto-generated method stub
+					double mapscale = mMap.getScale();
+					if (mapscale < 1155581.108577) {
+						mMap.setMapBackground(0xffffffff, Color.WHITE, 0, 0);
+						mMap.addLayer(mLocalTiledLayer);
+						mMap.addLayer(mGraphicsLayer);
+					}
+				}
+			});
+			mMap.addLayer(mTiledMapServiceLayer);
+			mMap.addLayer(mLocalTiledLayer);
+			mGraphicsLayer = addGraphicToLayer();
+			mMap.addLayer(mGraphicsLayer);
+			return "ok";
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if (result != null) {
+				Log.d(TAG, "Map ok!");
+			}
+
+		}
 	}
 
 }

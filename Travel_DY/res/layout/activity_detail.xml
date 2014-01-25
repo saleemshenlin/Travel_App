@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_detail"
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/txtHomePlace"
-            android:textColor="#ffffffff"
+            android:textColor="#fff"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,8 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linActionbar" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="1dp"
-                    android:background="#fff"
+                    android:background="@drawable/bg_nocorner_white"
                     android:orientation="vertical" >
 
                     <TextView
@@ -111,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="1dp"
-                    android:background="#fff"
+                    android:background="@drawable/bg_nocorner_white"
                     android:orientation="vertical" >
 
                     <TextView
@@ -170,4 +171,19 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/scrollView1"
+        android:orientation="vertical" >
+
+        <com.esri.android.map.MapView
+            android:id="@+id/mapDetailView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff" >
+        </com.esri.android.map.MapView>
+    </RelativeLayout>
+
+</RelativeLayout>

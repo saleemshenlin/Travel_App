@@ -1,24 +1,29 @@
 package com.travelapp;
 
-import android.R.color;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.esri.android.map.Callout;
+import com.esri.android.map.CalloutStyle;
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
-import com.esri.android.map.ags.ArcGISFeatureLayer;
 import com.esri.android.map.ags.ArcGISLocalTiledLayer;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
+import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.android.map.event.OnZoomListener;
 import com.esri.core.geometry.Envelope;
-import com.esri.core.symbol.SimpleMarkerSymbol;
-import com.esri.core.symbol.SimpleMarkerSymbol.STYLE;
+import com.esri.core.geometry.Point;
+import com.esri.core.map.Graphic;
 
 public class MapActivity extends Activity {
 	ImageView mBackImageView;
@@ -62,7 +67,7 @@ public class MapActivity extends Activity {
 		GraphicsLayer mLayer = new GraphicsLayer();
 		// create a simple marker symbol to be used by our graphic
 		mQuery = new Query();
-		mLayer = mQuery.getPois();
+		mLayer = mQuery.getPoisByType(TravelApplication.getContext(), 0);
 		return mLayer;
 
 	}
@@ -94,27 +99,122 @@ public class MapActivity extends Activity {
 			mMap.setMaxResolution(611.49622628138);
 			mMap.setMinResolution(9.55462853563415);
 			mMap.setOnZoomListener(new OnZoomListener() {
-				/**
-				 * serialVersionUID = 3648431371109601053L;
-				 */
-				private static final long serialVersionUID = 3648431371109601053L;
 
-				public void preAction(float arg0, float arg1, double arg2) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void preAction(float pivotX, float pivotY, double factor) {
 					// TODO Auto-generated method stub
+
 				}
 
-				public void postAction(float arg0, float arg1, double arg2) {
+				@Override
+				public void postAction(float pivotX, float pivotY, double factor) {
+					// TODO Auto-generated method stub
 					double mapscale = mMap.getScale();
 					if (mapscale < 1155581.108577) {
-						mMap.setMapBackground(0xffffffff, color.white, 0, 0);
+						mMap.setMapBackground(0xffffffff, Color.WHITE, 0, 0);
 						mMap.addLayer(mLocalTiledLayer);
+						mMap.addLayer(mGraphicsLayer);
 					}
 				}
 			});
 			mMap.addLayer(mTiledMapServiceLayer);
 			mMap.addLayer(mLocalTiledLayer);
-			addGraphicToLayer();
+			mGraphicsLayer = addGraphicToLayer();
 			mMap.addLayer(mGraphicsLayer);
+			mMap.setOnSingleTapListener(new OnSingleTapListener() {
+
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void onSingleTap(float x, float y) {
+					int[] graphicIDs = mGraphicsLayer.getGraphicIDs(x, y, 25);
+					if (graphicIDs != null && graphicIDs.length > 0) {
+						Callout mCallout = mMap.getCallout();
+						CalloutStyle mStyle = new CalloutStyle();
+						Intent mIntent = null;
+						int imgId = 1;
+						mStyle.setAnchor(5);
+						mStyle.setCornerCurve(10);
+						mStyle.setMaxHeight(56);
+						LayoutInflater mInflater = LayoutInflater
+								.from(MapActivity.this);
+						View mView = mInflater.inflate(R.layout.callout, null);
+						TextView mTextView = (TextView) mView
+								.findViewById(R.id.txtCallout);
+						ImageView mImageIconView = (ImageView) mView
+								.findViewById(R.id.imgCallout);
+						ImageView mImageMoreView = (ImageView) mView
+								.findViewById(R.id.imgCalloutMore);
+						Graphic mGraphic = mGraphicsLayer
+								.getGraphic(graphicIDs[0]);
+						String poiName = (String) mGraphic
+								.getAttributeValue("NAME");
+						if (poiName.length() > 7) {
+							String name = poiName.substring(0, 7);
+							mTextView.setText(name + "...");
+						} else {
+							String name = poiName;
+							mTextView.setText(name);
+						}
+						String poiId = (String) mGraphic
+								.getAttributeValue("ID");
+						switch (Integer.parseInt(poiId.substring(0, 1))) {
+						case 1:
+							imgId = MapActivity.this.getResources()
+									.getIdentifier("ic_scenic", "drawable",
+											"com.travelapp");
+							mStyle.setBackgroundColor(0xff9933CC);
+							mStyle.setFrameColor(0xff9933CC);
+							mIntent = new Intent(MapActivity.this,
+									ScenicDetailActivity.class);
+							break;
+						case 2:
+							imgId = MapActivity.this.getResources()
+									.getIdentifier("ic_hotel", "drawable",
+											"com.travelapp");
+							mStyle.setBackgroundColor(0xff0099CC);
+							mStyle.setFrameColor(0xff0099CC);
+							mIntent = new Intent(MapActivity.this,
+									HotelDetailActivity.class);
+							break;
+						case 3:
+							imgId = MapActivity.this.getResources()
+									.getIdentifier("ic_rest", "drawable",
+											"com.travelapp");
+							mStyle.setBackgroundColor(0xff669900);
+							mStyle.setFrameColor(0xff669900);
+							mIntent = new Intent(MapActivity.this,
+									RestDetailActivity.class);
+							break;
+						case 4:
+							imgId = MapActivity.this.getResources()
+									.getIdentifier("ic_fun", "drawable",
+											"com.travelapp");
+							mStyle.setBackgroundColor(0xffFF8800);
+							mStyle.setFrameColor(0xffFF8800);
+							mIntent = new Intent(MapActivity.this,
+									FunDetailActivity.class);
+							break;
+						}
+						map2Detail(mImageMoreView, mIntent, poiId);
+						Drawable mDrawable = MapActivity.this.getResources()
+								.getDrawable(imgId);
+						mImageIconView.setImageDrawable(mDrawable);
+						mCallout.setStyle(mStyle);
+						mCallout.setOffset(0, -15);
+						mCallout.show((Point) mGraphic.getGeometry(), mView);
+					}
+					Log.v("MapActivity", "OnSingleTapLinstener is running !");
+				}
+			});
 			return "ok";
 		}
 
@@ -131,4 +231,21 @@ public class MapActivity extends Activity {
 		}
 	}
 
+	private void map2Detail(ImageView imageView, final Intent intent,
+			final String id) {
+		imageView.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				intent.putExtra("ID", id);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+						| Intent.FLAG_ACTIVITY_NEW_TASK);
+				MapActivity.this.startActivity(intent);
+				MapActivity.this.finish();
+				MapActivity.this.overridePendingTransition(
+						R.anim.anim_in_right2left, R.anim.anim_out_right2left);
+			}
+		});
+	}
 }

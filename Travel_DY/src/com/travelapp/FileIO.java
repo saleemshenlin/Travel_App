@@ -166,6 +166,10 @@ public class FileIO {
 				ContentValues values = new ContentValues();
 				String mID = (String) mGraphic.getAttributeValue("NewID");
 				values.put(PoiDB.C_ID, mID);
+				String mName = (String) mGraphic.getAttributeValue("Name");
+				values.put(PoiDB.C_NAME, mName);
+				String mC_ID = (String) mGraphic.getAttributeValue("C_ID");
+				values.put(PoiDB.C_C_ID, mC_ID);
 				Geometry mGeometry = mGraphic.getGeometry();
 				String mShape = GeometryToWKT(mGeometry);
 				values.put(PoiDB.C_SHAPE, mShape);

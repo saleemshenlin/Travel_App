@@ -1,7 +1,13 @@
 package com.travelapp;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.Log;
 
 import com.esri.android.map.GraphicsLayer;
 import com.esri.core.geometry.Envelope;
@@ -11,8 +17,7 @@ import com.esri.core.geometry.Point;
 import com.esri.core.geometry.Polygon;
 import com.esri.core.geometry.Polyline;
 import com.esri.core.map.Graphic;
-import com.esri.core.symbol.SimpleMarkerSymbol;
-import com.esri.core.symbol.SimpleMarkerSymbol.STYLE;
+import com.esri.core.symbol.PictureMarkerSymbol;
 
 public class Query {
 	/**
@@ -49,6 +54,9 @@ public class Query {
 	public String getSectionViaType(int intIndex) {
 		String strSQL;
 		switch (intIndex) {
+		case 0:
+			strSQL = "";
+			return strSQL;
 		case 1:
 			strSQL = PoiDB.C_C_ID + " = '01'";
 			return strSQL;
@@ -66,7 +74,7 @@ public class Query {
 		}
 	}
 
-	public static Geometry WKTToGeometry(String wkt) {
+	public static Geometry wkt2Geometry(String wkt) {
 		Geometry geo = null;
 		if (wkt == null || wkt == "") {
 			return null;
@@ -124,21 +132,85 @@ public class Query {
 		return path;
 	}
 
-	public GraphicsLayer getPois() {
+	public GraphicsLayer getPoisByType(Context context, int type) {
 		GraphicsLayer mGraphicsLayer = new GraphicsLayer();
-		mItemCursor = mPoisProvider.query(PoisProvider.CONTENT_URI, null, null,
-				null, this.getSortOrder(PoiDB.C_ID));
-		mItemCursor.moveToFirst();
-		while (mItemCursor.moveToNext()) {
-			String WKT = mItemCursor.getString(mItemCursor
-					.getColumnIndex(PoiDB.C_SHAPE));
-			Point mPoint = (Point) Query.WKTToGeometry(WKT);
-			SimpleMarkerSymbol sms = new SimpleMarkerSymbol(Color.RED, 5,
-					STYLE.CIRCLE);
-			Graphic mGraphic = new Graphic(mPoint, sms);
-			mGraphicsLayer.addGraphic(mGraphic);
+		String queryByType = getSectionViaType(type);
+		mItemCursor = mPoisProvider.query(PoisProvider.CONTENT_URI, null,
+				queryByType, null, this.getSortOrder(PoiDB.C_ID));
+		Map<String, Object> mMap = new HashMap<String, Object>();
+
+		try {
+			mItemCursor.moveToFirst();
+			while (mItemCursor.moveToNext()) {
+				String WKT = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_SHAPE));
+				String ID = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_ID));
+				String TYPE = ID.substring(0, 1);
+				String NAME = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_NAME));
+				mMap.put("NAME", NAME);
+				mMap.put("ID", ID);
+				int imgId = context.getResources().getIdentifier("ic_" + TYPE,
+						"drawable", "com.travelapp");
+				Drawable mDrawable = context.getResources().getDrawable(imgId);
+				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
+						mDrawable);
+				Point mPoint = (Point) Query.wkt2Geometry(WKT);
+				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Graphic mGraphic = new Graphic(mPoint, mPictureMarkerSymbol,
+						mMap);
+				mGraphicsLayer.addGraphic(mGraphic);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			if (mItemCursor != null) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
 		}
 		return mGraphicsLayer;
 
 	}
+
+	public GraphicsLayer getPoisById(Context context, String id) {
+		GraphicsLayer mGraphicsLayer = new GraphicsLayer();
+		final Uri queryUri = Uri.parse(PoiProvider.CONTENT_URI.toString() + "/"
+				+ id);
+		mItemCursor = mPoisProvider.query(queryUri, null, null, null, null);
+		Map<String, Object> mMap = new HashMap<String, Object>();
+		try {
+			if (mItemCursor.moveToFirst()) {
+				String WKT = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_SHAPE));
+				String ID = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_ID));
+				String TYPE = ID.substring(0, 1);
+				String NAME = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_NAME));
+				mMap.put("NAME", NAME);
+				mMap.put("ID", ID);
+				int imgId = context.getResources().getIdentifier("ic_" + TYPE,
+						"drawable", "com.travelapp");
+				Drawable mDrawable = context.getResources().getDrawable(imgId);
+				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
+						mDrawable);
+				Point mPoint = (Point) Query.wkt2Geometry(WKT);
+				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Graphic mGraphic = new Graphic(mPoint, mPictureMarkerSymbol,
+						mMap);
+				mGraphicsLayer.addGraphic(mGraphic);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			if (mItemCursor != null) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
+		}
+		return mGraphicsLayer;
+	}
+
 }

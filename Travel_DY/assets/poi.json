@@ -1,7 +1,9 @@
 ﻿{
   "displayFieldName" : "ID",
   "fieldAliases" : {
-    "NewID" : "NewID"
+    "Name" : "Name",
+    "NewID" : "NewID",
+    "C_ID" : "C_ID"
   },
   "geometryType" : "esriGeometryPoint",
   "spatialReference" : {
@@ -9,16 +11,30 @@
   },
   "fields" : [
     {
+      "name" : "Name",
+      "type" : "esriFieldTypeString",
+      "alias" : "Name",
+      "length" : 254
+    },
+    {
       "name" : "NewID",
       "type" : "esriFieldTypeString",
       "alias" : "NewID",
+      "length" : 6
+    },
+    {
+      "name" : "C_ID",
+      "type" : "esriFieldTypeString",
+      "alias" : "C_ID",
       "length" : 6
     }
   ],
   "features" : [
     {
       "attributes" : {
-        "NewID" : "0105"
+        "Name" : "北国温泉养生休闲广场",
+        "NewID" : "0105",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13899093.915799998,
@@ -27,7 +43,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0102"
+        "Name" : "大庆石油科技馆",
+        "NewID" : "0102",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13904372.129500002,
@@ -36,7 +54,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0101"
+        "Name" : "大庆油田历史陈列馆",
+        "NewID" : "0101",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13916628.405400001,
@@ -45,7 +65,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0109"
+        "Name" : "二号丛式井平台",
+        "NewID" : "0109",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13912629.141400002,
@@ -54,7 +76,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0104"
+        "Name" : "飞天滑雪场",
+        "NewID" : "0104",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13898699.622199997,
@@ -63,7 +87,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0106"
+        "Name" : "林甸温泉疗养院",
+        "NewID" : "0106",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13901662.167800002,
@@ -72,7 +98,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0107"
+        "Name" : "龙凤湿地",
+        "NewID" : "0107",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13933609.141800001,
@@ -81,7 +109,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0108"
+        "Name" : "石油之光",
+        "NewID" : "0108",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13918506.791000001,
@@ -90,7 +120,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0103"
+        "Name" : "大庆铁人王进喜纪念馆",
+        "NewID" : "0103",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13901415.797300003,
@@ -99,7 +131,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0110"
+        "Name" : "油田乐园",
+        "NewID" : "0110",
+        "C_ID" : "01"
       },
       "geometry" : {
         "x" : 13899109.055299997,
@@ -108,7 +142,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0310"
+        "Name" : "北国飘香饺子馆",
+        "NewID" : "0310",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13851677.9353,
@@ -117,7 +153,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0309"
+        "Name" : "川香楼餐厅",
+        "NewID" : "0309",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13945077.993199997,
@@ -126,7 +164,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0305"
+        "Name" : "大庆国府肥牛餐饮有限公司",
+        "NewID" : "0305",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13926898.6303,
@@ -135,7 +175,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0303"
+        "Name" : "春子园木炭烧烤坊（晚报大街店）",
+        "NewID" : "0303",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13926809.018100001,
@@ -144,7 +186,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0301"
+        "Name" : "男孩女孩小鱼屋",
+        "NewID" : "0301",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13926641.2597,
@@ -153,7 +197,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0304"
+        "Name" : "天原慧饮食有限公司",
+        "NewID" : "0304",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13926839.0744,
@@ -162,7 +208,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0306"
+        "Name" : "西华酒楼",
+        "NewID" : "0306",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13900504.556400001,
@@ -171,7 +219,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0302"
+        "Name" : "一口猪（新村店）",
+        "NewID" : "0302",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13926780.409000002,
@@ -180,7 +230,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0308"
+        "Name" : "肇源百合海鲜火锅",
+        "NewID" : "0308",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13923651.0361,
@@ -189,7 +241,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0402"
+        "Name" : "大庆百货大楼",
+        "NewID" : "0402",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13915659.703199998,
@@ -198,7 +252,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0407"
+        "Name" : "大商集团大庆让胡路商场",
+        "NewID" : "0407",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13899747.917800002,
@@ -207,7 +263,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0403"
+        "Name" : "大同区阳光购物广场",
+        "NewID" : "0403",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13894429.963100001,
@@ -216,7 +274,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0404"
+        "Name" : "香榭丽购物中心",
+        "NewID" : "0404",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13926815.586000003,
@@ -225,7 +285,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0405"
+        "Name" : "龙凤商贸城",
+        "NewID" : "0405",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13926673.208400004,
@@ -234,7 +296,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0408"
+        "Name" : "鸿运乘风购物中心",
+        "NewID" : "0408",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13900429.527099997,
@@ -243,7 +307,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0406"
+        "Name" : "新光天地购物中心",
+        "NewID" : "0406",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13901102.7874,
@@ -252,7 +318,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0409"
+        "Name" : "肇州县中心商城",
+        "NewID" : "0409",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13944707.4111,
@@ -261,7 +329,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0410"
+        "Name" : "银座尚品购物中心",
+        "NewID" : "0410",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13927209.545699999,
@@ -270,7 +340,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0209"
+        "Name" : "新华宾馆",
+        "NewID" : "0209",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13945532.065899998,
@@ -279,7 +351,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0206"
+        "Name" : "肇源宾馆",
+        "NewID" : "0206",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13923205.535499997,
@@ -288,7 +362,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0208"
+        "Name" : "大庆如家快捷酒店（铁人广场店）",
+        "NewID" : "0208",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13902038.538999997,
@@ -297,7 +373,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0204"
+        "Name" : "大庆东方铭悦商务大酒店",
+        "NewID" : "0204",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13929792.157799996,
@@ -306,7 +384,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0201"
+        "Name" : "大庆宾馆",
+        "NewID" : "0201",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13924212.156999998,
@@ -315,7 +395,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0207"
+        "Name" : "天湖宾馆",
+        "NewID" : "0207",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13851872.410499997,
@@ -324,7 +406,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0203"
+        "Name" : "大庆绿阳春酒店",
+        "NewID" : "0203",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13929492.0405,
@@ -333,7 +417,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0202"
+        "Name" : "大庆曼哈维大酒店",
+        "NewID" : "0202",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13932834.630800001,
@@ -342,7 +428,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0307"
+        "Name" : "千里马百合料理酒店",
+        "NewID" : "0307",
+        "C_ID" : "03"
       },
       "geometry" : {
         "x" : 13899963.543700002,
@@ -351,7 +439,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0210"
+        "Name" : "大庆连环湖休闲宾馆",
+        "NewID" : "0210",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13824949.054700002,
@@ -360,7 +450,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0205"
+        "Name" : "大庆微风山谷假日宾馆",
+        "NewID" : "0205",
+        "C_ID" : "02"
       },
       "geometry" : {
         "x" : 13902728.831200004,
@@ -369,7 +461,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "0401"
+        "Name" : "沃尔玛经六街店",
+        "NewID" : "0401",
+        "C_ID" : "04"
       },
       "geometry" : {
         "x" : 13927055.368199997,
