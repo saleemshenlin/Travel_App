@@ -27,6 +27,10 @@ public class TravelApplication extends Application {
 	 */
 	private static Context CONTEXT;
 	/**
+	 * 是否来自ListMap
+	 */
+	public static boolean isFromMap = false;
+	/**
 	 * 实例一个mEventData
 	 */
 	private static PoiDB mPoiDB;
@@ -39,7 +43,6 @@ public class TravelApplication extends Application {
 		mPoiDB = new PoiDB(getContext());
 		return mPoiDB;
 	}
-
 
 	/**
 	 * 创建LbsApplication<br>
@@ -57,6 +60,20 @@ public class TravelApplication extends Application {
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
+	}
+
+	/**
+	 * 用于Dp转像素
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param dp
+	 *            DIP
+	 * @return int PX
+	 */
+	public static int Dp2Px(Context context, int dp) {
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (int) (dp * scale + 0.5f);
 	}
 
 	/**

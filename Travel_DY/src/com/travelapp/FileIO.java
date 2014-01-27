@@ -1,7 +1,6 @@
 package com.travelapp;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +10,6 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.R.integer;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;

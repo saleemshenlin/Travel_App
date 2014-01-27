@@ -51,21 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/linActionbar" >
         </ListView>
-
-        <RelativeLayout
-            android:id="@+id/relMapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignTop="@+id/listPoi"
-            android:orientation="vertical" >
-
-            <com.esri.android.map.MapView
-                android:id="@+id/mapListView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff" >
-            </com.esri.android.map.MapView>
-        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

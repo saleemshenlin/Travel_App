@@ -29,9 +29,13 @@ public class MapActivity extends Activity {
 	ImageView mBackImageView;
 	MapView mMap = null;
 	Query mQuery;
+	Intent mIntent;
+	Bundle mBundle;
 	GraphicsLayer mGraphicsLayer;
 	ArcGISLocalTiledLayer mLocalTiledLayer;
 	ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
+	String mFunction = "POIS";
+	int mType = 0;
 	String url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer";
 
 	@Override
@@ -47,27 +51,217 @@ public class MapActivity extends Activity {
 		mBackImageView = (ImageView) findViewById(R.id.imgListBack);
 		mMap = (MapView) findViewById(R.id.map);
 		mGraphicsLayer = new GraphicsLayer();
-		mBackImageView.setOnClickListener(new View.OnClickListener() {
+		mIntent = getIntent();
+		mBundle = mIntent.getExtras();
+		if (mBundle != null) {
+			mFunction = mBundle.getString("FUNCTION");
+			mType = mBundle.getInt("TYPE");
+			if (mFunction.equals("POIS")) {
+				switch (mType) {
+				case 1:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(MapActivity.this, HomeActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-						| Intent.FLAG_ACTIVITY_NEW_TASK);
-				MapActivity.this.startActivity(intent);
-				MapActivity.this.finish();
-				MapActivity.this.overridePendingTransition(
-						R.anim.anim_in_left2right, R.anim.anim_out_left2right);
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											ScenicListActivity.class);
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 2:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											HotelListActivity.class);
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 3:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											RestListActivity.class);
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 4:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											FunListActivity.class);
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				}
+			} else {
+				switch (Integer.parseInt(String.valueOf(mType).substring(0, 1))) {
+				case 1:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											ScenicDetailActivity.class);
+									intent.putExtra("ID", Long.parseLong(String
+											.valueOf(mType)));
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 2:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											HotelDetailActivity.class);
+									intent.putExtra("ID", Long.parseLong(String
+											.valueOf(mType)));
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 3:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											RestDetailActivity.class);
+									intent.putExtra("ID", Long.parseLong(String
+											.valueOf(mType)));
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				case 4:
+					mBackImageView
+							.setOnClickListener(new View.OnClickListener() {
+
+								@Override
+								public void onClick(View v) {
+									// TODO Auto-generated method stub
+									Intent intent = new Intent(
+											MapActivity.this,
+											FunDetailActivity.class);
+									intent.putExtra("ID", Long.parseLong(String
+											.valueOf(mType)));
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+											| Intent.FLAG_ACTIVITY_NEW_TASK);
+									MapActivity.this.startActivity(intent);
+									MapActivity.this.finish();
+									MapActivity.this.overridePendingTransition(
+											R.anim.anim_in_left2right,
+											R.anim.anim_out_left2right);
+								}
+							});
+					break;
+				}
 			}
-		});
+		} else {
+			mBackImageView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(MapActivity.this,
+							HomeActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+							| Intent.FLAG_ACTIVITY_NEW_TASK);
+					MapActivity.this.startActivity(intent);
+					MapActivity.this.finish();
+					MapActivity.this.overridePendingTransition(
+							R.anim.anim_in_left2right,
+							R.anim.anim_out_left2right);
+				}
+			});
+		}
+
 	}
 
-	public GraphicsLayer addGraphicToLayer() {
+	public GraphicsLayer addGraphicToLayer(String function, int type) {
 		GraphicsLayer mLayer = new GraphicsLayer();
 		// create a simple marker symbol to be used by our graphic
 		mQuery = new Query();
-		mLayer = mQuery.getPoisByType(TravelApplication.getContext(), 0);
+		if (function.equals("POIS")) {
+			mLayer = mQuery.getPoisByType(TravelApplication.getContext(), type);
+		} else {
+			mLayer = mQuery.getPoisById(TravelApplication.getContext(),
+					String.valueOf(type));
+		}
 		return mLayer;
 
 	}
@@ -91,8 +285,10 @@ public class MapActivity extends Activity {
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			mTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(url);
+			// mLocalTiledLayer = new ArcGISLocalTiledLayer(
+			// "file:///mnt/sdcard/mnt/sdcard/daqingcache/Layers");
 			mLocalTiledLayer = new ArcGISLocalTiledLayer(
-					"file:///mnt/sdcard/mnt/sdcard/daqingcache/Layers");
+					"file:///storage/sdcard0/daqingcache/Layers");
 			mMap.setExtent(new Envelope(13570407.0434979, 5681967.05272005,
 					14203165.9874021, 6017039.55107995), 0);
 			mMap.setScale(2311162.217155);
@@ -124,7 +320,7 @@ public class MapActivity extends Activity {
 			});
 			mMap.addLayer(mTiledMapServiceLayer);
 			mMap.addLayer(mLocalTiledLayer);
-			mGraphicsLayer = addGraphicToLayer();
+			mGraphicsLayer = addGraphicToLayer(mFunction, mType);
 			mMap.addLayer(mGraphicsLayer);
 			mMap.setOnSingleTapListener(new OnSingleTapListener() {
 
@@ -143,7 +339,10 @@ public class MapActivity extends Activity {
 						int imgId = 1;
 						mStyle.setAnchor(5);
 						mStyle.setCornerCurve(10);
-						mStyle.setMaxHeight(56);
+						mStyle.setMaxHeight(TravelApplication.Dp2Px(
+								MapActivity.this, 56));
+						mStyle.setMaxWidth(TravelApplication.Dp2Px(
+								MapActivity.this, 200));
 						LayoutInflater mInflater = LayoutInflater
 								.from(MapActivity.this);
 						View mView = mInflater.inflate(R.layout.callout, null);
@@ -153,6 +352,9 @@ public class MapActivity extends Activity {
 								.findViewById(R.id.imgCallout);
 						ImageView mImageMoreView = (ImageView) mView
 								.findViewById(R.id.imgCalloutMore);
+						if (mFunction.equals("POI")) {
+							mImageMoreView.setVisibility(View.GONE);
+						}
 						Graphic mGraphic = mGraphicsLayer
 								.getGraphic(graphicIDs[0]);
 						String poiName = (String) mGraphic
@@ -164,7 +366,7 @@ public class MapActivity extends Activity {
 							String name = poiName;
 							mTextView.setText(name);
 						}
-						String poiId = (String) mGraphic
+						final String poiId = (String) mGraphic
 								.getAttributeValue("ID");
 						switch (Integer.parseInt(poiId.substring(0, 1))) {
 						case 1:
@@ -204,7 +406,56 @@ public class MapActivity extends Activity {
 									FunDetailActivity.class);
 							break;
 						}
-						map2Detail(mImageMoreView, mIntent, poiId);
+						if (mType == 0) {
+							final Intent newIntent = mIntent;
+							mImageMoreView
+									.setOnClickListener(new View.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											TravelApplication.isFromMap = true;
+											newIntent.putExtra("ID",
+													Long.parseLong(poiId));
+											newIntent.putExtra("FROM",
+													"MapActivity");
+											newIntent
+													.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+															| Intent.FLAG_ACTIVITY_NEW_TASK);
+											MapActivity.this
+													.startActivity(newIntent);
+											MapActivity.this.finish();
+											MapActivity.this
+													.overridePendingTransition(
+															R.anim.anim_in_right2left,
+															R.anim.anim_out_right2left);
+										}
+									});
+						} else if (mType == 1 || mType == 2 || mType == 3
+								|| mType == 4) {
+							final Intent newIntent = mIntent;
+							mImageMoreView
+									.setOnClickListener(new View.OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											TravelApplication.isFromMap = true;
+											newIntent.putExtra("ID",
+													Long.parseLong(poiId));
+											newIntent.putExtra("FROM",
+													"ListActivity");
+											newIntent
+													.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+															| Intent.FLAG_ACTIVITY_NEW_TASK);
+											MapActivity.this
+													.startActivity(newIntent);
+											MapActivity.this.finish();
+											MapActivity.this
+													.overridePendingTransition(
+															R.anim.anim_in_right2left,
+															R.anim.anim_out_right2left);
+										}
+									});
+						}
 						Drawable mDrawable = MapActivity.this.getResources()
 								.getDrawable(imgId);
 						mImageIconView.setImageDrawable(mDrawable);
@@ -231,21 +482,4 @@ public class MapActivity extends Activity {
 		}
 	}
 
-	private void map2Detail(ImageView imageView, final Intent intent,
-			final String id) {
-		imageView.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				intent.putExtra("ID", id);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-						| Intent.FLAG_ACTIVITY_NEW_TASK);
-				MapActivity.this.startActivity(intent);
-				MapActivity.this.finish();
-				MapActivity.this.overridePendingTransition(
-						R.anim.anim_in_right2left, R.anim.anim_out_right2left);
-			}
-		});
-	}
 }
