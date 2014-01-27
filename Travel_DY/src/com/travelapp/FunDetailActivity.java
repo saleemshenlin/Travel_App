@@ -131,7 +131,8 @@ public class FunDetailActivity extends Activity {
 			}
 		});
 		if (TravelApplication.isFromMap) {
-			mMapImageView.setVisibility(View.GONE);
+			Drawable mDrawable = mResources.getDrawable(R.drawable.bg_noimg);
+			mMapImageView.setImageDrawable(mDrawable);
 			TravelApplication.isFromMap = false;
 		}
 	}

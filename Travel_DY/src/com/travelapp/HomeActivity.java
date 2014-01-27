@@ -13,6 +13,7 @@ public class HomeActivity extends Activity {
 	private ImageView mHotelImageView;
 	private ImageView mRestImageView;
 	private ImageView mFunImageView;
+	private ImageView mRouteImageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class HomeActivity extends Activity {
 		mHotelImageView = (ImageView) findViewById(R.id.imgItemHotel);
 		mFunImageView = (ImageView) findViewById(R.id.imgItemFun);
 		mRestImageView = (ImageView) findViewById(R.id.imgItemRest);
+		mRouteImageView = (ImageView) findViewById(R.id.imgItemRoute);
 		mMapImageView.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -80,6 +82,18 @@ public class HomeActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeActivity.this,
 						FunListActivity.class);
+				HomeActivity.this.startActivity(intent);
+				HomeActivity.this.finish();
+				HomeActivity.this.overridePendingTransition(
+						R.anim.anim_in_right2left, R.anim.anim_out_right2left);
+			}
+		});
+		mRouteImageView.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(HomeActivity.this,
+						RouteListActivity.class);
 				HomeActivity.this.startActivity(intent);
 				HomeActivity.this.finish();
 				HomeActivity.this.overridePendingTransition(

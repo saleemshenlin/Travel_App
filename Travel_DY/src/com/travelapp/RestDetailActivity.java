@@ -118,7 +118,7 @@ public class RestDetailActivity extends Activity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(RestDetailActivity.this,
-							MapActivity.class);
+							RestListActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 							| Intent.FLAG_ACTIVITY_NEW_TASK);
 					RestDetailActivity.this.startActivity(intent);
@@ -146,7 +146,8 @@ public class RestDetailActivity extends Activity {
 			}
 		});
 		if (TravelApplication.isFromMap) {
-			mMapImageView.setVisibility(View.GONE);
+			Drawable mDrawable = mResources.getDrawable(R.drawable.bg_noimg);
+			mMapImageView.setImageDrawable(mDrawable);
 			TravelApplication.isFromMap = false;
 		}
 	}
