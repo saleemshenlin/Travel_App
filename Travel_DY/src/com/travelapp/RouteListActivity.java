@@ -54,6 +54,7 @@ public class RouteListActivity extends Activity {
 						RouteDetailActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 						| Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("ID", 1);
 				RouteListActivity.this.startActivity(intent);
 				RouteListActivity.this.finish();
 				RouteListActivity.this.overridePendingTransition(
@@ -69,6 +70,7 @@ public class RouteListActivity extends Activity {
 						RouteDetailActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 						| Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("ID", 2);
 				RouteListActivity.this.startActivity(intent);
 				RouteListActivity.this.finish();
 				RouteListActivity.this.overridePendingTransition(
@@ -84,6 +86,7 @@ public class RouteListActivity extends Activity {
 						RouteDetailActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 						| Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("ID", 3);
 				RouteListActivity.this.startActivity(intent);
 				RouteListActivity.this.finish();
 				RouteListActivity.this.overridePendingTransition(

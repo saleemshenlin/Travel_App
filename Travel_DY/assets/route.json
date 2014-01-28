@@ -1,7 +1,9 @@
 {
   "displayFieldName" : "Name",
   "fieldAliases" : {
-    "NewID" : "NewID"
+    "NewID" : "NewID",
+    "Name" : "Name",
+    "Detail" : "Detail"
   },
   "geometryType" : "esriGeometryPolyline",
   "spatialReference" : {
@@ -13,12 +15,26 @@
       "type" : "esriFieldTypeString",
       "alias" : "NewID",
       "length" : 50
+    },
+    {
+      "name" : "Name",
+      "type" : "esriFieldTypeString",
+      "alias" : "Name",
+      "length" : 128
+    },
+    {
+      "name" : "Detail",
+      "type" : "esriFieldTypeString",
+      "alias" : "Detail",
+      "length" : 50
     }
   ],
   "features" : [
     {
       "attributes" : {
-        "NewID" : "1"
+        "NewID" : "1",
+        "Name" : "一日游-感知大庆精神，倾听油田发展的足音",
+        "Detail" : "0101;0103;0102"
       },
       "geometry" : {
         "paths" : [
@@ -1341,7 +1357,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "2"
+        "NewID" : "2",
+        "Name" : "二日游-体验冰与火交融的寒地温泉，欣赏独特雪地风光",
+        "Detail" : "0104;0105;0106"
       },
       "geometry" : {
         "paths" : [
@@ -3736,7 +3754,9 @@
     },
     {
       "attributes" : {
-        "NewID" : "3"
+        "NewID" : "3",
+        "Name" : "自驾游-广袤的湿地，宽广的道路，组团式的城市布局",
+        "Detail" : "0107;0108;0101;0109;0103;0102"
       },
       "geometry" : {
         "paths" : [

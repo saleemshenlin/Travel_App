@@ -41,7 +41,8 @@ public class RouteProvider extends ContentProvider {
 			if (id < 0) {
 				return db.delete(PoiDB.TABLE_ROUTE, selection, selectionArgs);
 			} else {
-				return db.delete(PoiDB.TABLE_ROUTE, PoiDB.C_ID + "=" + id, null);
+				return db
+						.delete(PoiDB.TABLE_ROUTE, PoiDB.C_ID + "=" + id, null);
 			}
 		} finally {
 			db.close();
@@ -98,8 +99,8 @@ public class RouteProvider extends ContentProvider {
 				return db.query(PoiDB.TABLE_ROUTE, projection, selection,
 						selectionArgs, null, null, sortOrder); //
 			} else {
-				Cursor cursor = db.query(PoiDB.TABLE_ROUTE, projection, PoiDB.C_ID
-						+ " = " + id, null, null, null, null);
+				Cursor cursor = db.query(PoiDB.TABLE_ROUTE, projection,
+						PoiDB.C_ID + " = " + id, null, null, null, null);
 				return cursor; //
 			}
 		} catch (Exception e) {
@@ -122,10 +123,11 @@ public class RouteProvider extends ContentProvider {
 				.getWritableDatabase();
 		try {
 			if (id < 0) {
-				return db.update(PoiDB.TABLE_ROUTE, values, selection, selectionArgs);
+				return db.update(PoiDB.TABLE_ROUTE, values, selection,
+						selectionArgs);
 			} else {
-				return db.update(PoiDB.TABLE_ROUTE, values, PoiDB.C_ID + "=" + id,
-						null);
+				return db.update(PoiDB.TABLE_ROUTE, values, PoiDB.C_ID + "="
+						+ id, null);
 			}
 		} finally {
 			db.close();

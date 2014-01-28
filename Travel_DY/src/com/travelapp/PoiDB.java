@@ -77,7 +77,8 @@ public class PoiDB {
 					+ " INTEGER PRIMARY KEY," + C_NAME + " VARCHAR(128),"
 					+ C_C_ID + " VARCHAR(10)," + C_SHAPE + " TEXT)");
 			db.execSQL("create TABLE " + TABLE_ROUTE + "(" + C_ID
-					+ " INTEGER PRIMARY KEY," + C_SHAPE + " TEXT)");
+					+ " INTEGER PRIMARY KEY," + C_NAME + " VARCHAR(128),"
+					+ C_ABSTRACT + " TEXT," + C_SHAPE + " TEXT)");
 		}
 
 		/**

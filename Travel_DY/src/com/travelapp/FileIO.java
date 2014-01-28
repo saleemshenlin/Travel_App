@@ -166,15 +166,18 @@ public class FileIO {
 				values.put(PoiDB.C_ID, mID);
 				String mName = (String) mGraphic.getAttributeValue("Name");
 				values.put(PoiDB.C_NAME, mName);
-				String mC_ID = (String) mGraphic.getAttributeValue("C_ID");
-				values.put(PoiDB.C_C_ID, mC_ID);
 				Geometry mGeometry = mGraphic.getGeometry();
 				String mShape = GeometryToWKT(mGeometry);
 				values.put(PoiDB.C_SHAPE, mShape);
 				if (filename.equals("poi.json")) {
+					String mC_ID = (String) mGraphic.getAttributeValue("C_ID");
+					values.put(PoiDB.C_C_ID, mC_ID);
 					TravelApplication.getPoiDB().insertOrIgnore(values,
 							PoiDB.TABLE_POIS);
 				} else {
+					String mABSTRACT = (String) mGraphic
+							.getAttributeValue("Detail");
+					values.put(PoiDB.C_ABSTRACT, mABSTRACT);
 					TravelApplication.getPoiDB().insertOrIgnore(values,
 							PoiDB.TABLE_ROUTE);
 				}
