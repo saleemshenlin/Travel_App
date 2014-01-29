@@ -115,6 +115,24 @@ public class ScenicDetailActivity extends Activity {
 							R.anim.anim_out_left2right);
 				}
 			});
+		} else if (mFrom.equals("RouteDetailActivity")) {
+			mBackImageView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(ScenicDetailActivity.this,
+							RouteDetailActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+							| Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.putExtra("ID", mBundle.getInt("ROUTEID"));
+					ScenicDetailActivity.this.startActivity(intent);
+					ScenicDetailActivity.this.finish();
+					ScenicDetailActivity.this.overridePendingTransition(
+							R.anim.anim_in_left2right,
+							R.anim.anim_out_left2right);
+				}
+			});
 		} else {
 			mBackImageView.setOnClickListener(new View.OnClickListener() {
 
@@ -153,6 +171,9 @@ public class ScenicDetailActivity extends Activity {
 			Drawable mDrawable = mResources.getDrawable(R.drawable.bg_noimg);
 			mMapImageView.setImageDrawable(mDrawable);
 			TravelApplication.isFromMap = false;
+		} else if (mFrom.equals("RouteDetailActivity")) {
+			Drawable mDrawable = mResources.getDrawable(R.drawable.bg_noimg);
+			mMapImageView.setImageDrawable(mDrawable);
 		}
 	}
 

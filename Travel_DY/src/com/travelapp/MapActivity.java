@@ -36,7 +36,6 @@ public class MapActivity extends Activity {
 	ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
 	String mFunction = "POIS";
 	int mType = 0;
-	String url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -284,11 +283,12 @@ public class MapActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			mTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(url);
+			mTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(
+					getString(R.string.map_url));
 			// mLocalTiledLayer = new ArcGISLocalTiledLayer(
 			// "file:///mnt/sdcard/mnt/sdcard/daqingcache/Layers");
 			mLocalTiledLayer = new ArcGISLocalTiledLayer(
-					"file:///storage/sdcard0/daqingcache/Layers");
+					getString(R.string.map_address));
 			mMap.setExtent(new Envelope(13570407.0434979, 5681967.05272005,
 					14203165.9874021, 6017039.55107995), 0);
 			mMap.setScale(2311162.217155);

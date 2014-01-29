@@ -114,10 +114,18 @@ public final class R {
         public static final int img_0501=0x7f020052;
         public static final int img_0502=0x7f020053;
         public static final int img_0503=0x7f020054;
+        public static final int num_1=0x7f020055;
+        public static final int num_2=0x7f020056;
+        public static final int num_3=0x7f020057;
+        public static final int num_4=0x7f020058;
+        public static final int num_5=0x7f020059;
+        public static final int num_6=0x7f02005a;
+        public static final int num_7=0x7f02005b;
+        public static final int num_8=0x7f02005c;
     }
     public static final class id {
         public static final int RelListView=0x7f0a001a;
-        public static final int action_settings=0x7f0a002b;
+        public static final int action_settings=0x7f0a002c;
         public static final int gridHome=0x7f0a0011;
         public static final int imgCallout=0x7f0a0023;
         public static final int imgCalloutMore=0x7f0a0025;
@@ -135,7 +143,8 @@ public final class R {
         public static final int imgItemSocial=0x7f0a0019;
         public static final int imgListBack=0x7f0a0001;
         public static final int imgListMap=0x7f0a0003;
-        public static final int imgPalce=0x7f0a0027;
+        public static final int imgPalce=0x7f0a0028;
+        public static final int imgRouteRow=0x7f0a0026;
         public static final int linActionbar=0x7f0a0000;
         public static final int linTime=0x7f0a0007;
         public static final int listPoi=0x7f0a001b;
@@ -155,11 +164,11 @@ public final class R {
         public static final int txtItemTele=0x7f0a000a;
         public static final int txtItemTime=0x7f0a0008;
         public static final int txtListTitle=0x7f0a0002;
-        public static final int txtRouteRowTitle=0x7f0a0026;
+        public static final int txtRouteRowTitle=0x7f0a0027;
         public static final int txtRouteTitle=0x7f0a001d;
-        public static final int txtRowAbstract=0x7f0a002a;
-        public static final int txtRowPrice=0x7f0a0029;
-        public static final int txtRowTitle=0x7f0a0028;
+        public static final int txtRowAbstract=0x7f0a002b;
+        public static final int txtRowPrice=0x7f0a002a;
+        public static final int txtRowTitle=0x7f0a0029;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
@@ -180,6 +189,8 @@ public final class R {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
         public static final int hello_world=0x7f070002;
+        public static final int map_address=0x7f070006;
+        public static final int map_url=0x7f070005;
         public static final int txtHomePlace=0x7f070004;
         public static final int txtHomeTitle=0x7f070003;
     }

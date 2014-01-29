@@ -85,7 +85,7 @@ public class Query {
 			String[] values = temp.split(" ");
 			geo = new Point(Double.valueOf(values[0]),
 					Double.valueOf(values[1]));
-		} else if (headStr.equals("POLYGON") || headStr.equals("Polygon")) {
+		} else if (headStr.equals("POLYLINE") || headStr.equals("Polygon")) {
 			geo = parseWKT(temp, headStr);
 		} else if (headStr.equals("Envelope")) {
 			String[] extents = temp.split(",");
@@ -109,7 +109,7 @@ public class Query {
 		}
 		Point startPoint = null;
 		MultiPath path = null;
-		if (type.equals("POLYGON")) {
+		if (type.equals("POLYLINE")) {
 			path = new Polyline();
 		} else {
 			path = new Polygon();
@@ -198,7 +198,9 @@ public class Query {
 						mDrawable);
 				Point mPoint = (Point) Query.wkt2Geometry(WKT);
 				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
-				Graphic mGraphic = new Graphic(mPoint, mPictureMarkerSymbol,
+				Point mNewPoint = new Point(mPoint.getX(),
+						mPoint.getY() - 0.001);
+				Graphic mGraphic = new Graphic(mNewPoint, mPictureMarkerSymbol,
 						mMap);
 				mGraphicsLayer.addGraphic(mGraphic);
 			}
@@ -213,4 +215,38 @@ public class Query {
 		return mGraphicsLayer;
 	}
 
+	public Graphic getPoisByIdInRoute(Context context, String id, int postion) {
+		Graphic mGraphic = null;
+		final Uri queryUri = Uri.parse(PoiProvider.CONTENT_URI.toString() + "/"
+				+ id);
+		mItemCursor = mPoisProvider.query(queryUri, null, null, null, null);
+		Map<String, Object> mMap = new HashMap<String, Object>();
+		try {
+			if (mItemCursor.moveToFirst()) {
+				String WKT = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_SHAPE));
+				String NAME = mItemCursor.getString(mItemCursor
+						.getColumnIndex(PoiDB.C_NAME));
+				mMap.put("NAME", NAME);
+				mMap.put("POSTION", "num_" + postion);
+				int imgId = context.getResources().getIdentifier(
+						"num_" + postion, "drawable", "com.travelapp");
+				Drawable mDrawable = context.getResources().getDrawable(imgId);
+				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
+						mDrawable);
+				Point mPoint = (Point) Query.wkt2Geometry(WKT);
+				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Point mNewPoint = new Point(mPoint.getX(), mPoint.getY() + 200);
+				mGraphic = new Graphic(mNewPoint, mPictureMarkerSymbol, mMap);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		} finally {
+			if (mItemCursor != null) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
+		}
+		return mGraphic;
+	}
 }

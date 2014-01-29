@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="txtHomeTitle">旅游指南</string>
     <string name="txtHomePlace">大庆</string>
+    <string name="map_url">http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer</string>
+    <string name="map_address">file:///storage/sdcard0/daqingcache/Layers</string>
 
 </resources>
