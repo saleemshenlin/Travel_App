@@ -1,7 +1,6 @@
 package com.travelapp;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +24,7 @@ public class HomeActivity extends Activity {
 	private ImageView mFunImageView;
 	private ImageView mRouteImageView;
 	private ImageView mSocialImageView;
+	private ImageView mAroundImageView;
 	private IWXAPI mIwxapi;
 
 	@Override
@@ -43,6 +43,7 @@ public class HomeActivity extends Activity {
 		mRestImageView = (ImageView) findViewById(R.id.imgItemRest);
 		mRouteImageView = (ImageView) findViewById(R.id.imgItemRoute);
 		mSocialImageView = (ImageView) findViewById(R.id.imgItemSocial);
+		mAroundImageView = (ImageView) findViewById(R.id.imgItemAround);
 		mMapImageView.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -96,6 +97,18 @@ public class HomeActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(HomeActivity.this,
 						FunListActivity.class);
+				HomeActivity.this.startActivity(intent);
+				HomeActivity.this.finish();
+				HomeActivity.this.overridePendingTransition(
+						R.anim.anim_in_right2left, R.anim.anim_out_right2left);
+			}
+		});
+		mAroundImageView.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(HomeActivity.this,
+						AroundListActivity.class);
 				HomeActivity.this.startActivity(intent);
 				HomeActivity.this.finish();
 				HomeActivity.this.overridePendingTransition(
@@ -171,4 +184,8 @@ public class HomeActivity extends Activity {
 		return (type == null) ? String.valueOf(System.currentTimeMillis())
 				: type + System.currentTimeMillis();
 	}
+
+	
+
+	
 }

@@ -5,6 +5,13 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.BMapManager;
+import com.esri.core.geometry.Point;
+
 public class TravelApplication extends Application {
 	/**
 	 * 定义一个标签,在LogCat内表示LBSApplication
@@ -30,9 +37,10 @@ public class TravelApplication extends Application {
 	 * 是否来自ListMap
 	 */
 	public static boolean isFromMap = false;
-	/**
-	 * 实例一个mEventData
-	 */
+
+	public static LocationClient mLocationClient = null;
+	public static Point mLocationPoint;
+	private BDLocationListener mBDListener = (BDLocationListener) new MyLocationListener();
 	private static PoiDB mPoiDB;
 
 	public static Context getContext() {
@@ -57,9 +65,11 @@ public class TravelApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		CONTEXT = getApplicationContext();
+		mLocationPoint = new Point(121.423656, 31.170015);
 		Log.i(TAG, "LBSApplication onCreate!");
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
+		initBDLocation();
 	}
 
 	/**
@@ -109,5 +119,82 @@ public class TravelApplication extends Application {
 
 	public static void setScreenDPI(double screenDPI) {
 		TravelApplication.SCREENDPI = screenDPI;
+	}
+
+	private void initBDLocation() {
+		mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
+		mLocationClient.registerLocationListener(mBDListener);
+		// mLocationClient.setAK(getString(R.string.baiduak));
+		LocationClientOption option = new LocationClientOption();
+		option.setOpenGps(true);
+		option.setAddrType("all");// 返回的定位结果包含地址信息
+		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+		option.setScanSpan(5000);// 设置发起定位请求的间隔时间为5000ms
+		option.disableCache(true);// 禁止启用缓存定位
+		option.setPoiNumber(5); // 最多返回POI个数
+		option.setPoiDistance(1000); // poi查询距离
+		option.setPoiExtraInfo(true); // 是否需要POI的电话和地址等详细信息
+		mLocationClient.setLocOption(option);
+	}
+
+	public class MyLocationListener implements BDLocationListener {
+		@Override
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null)
+				return;
+			StringBuffer sb = new StringBuffer(256);
+			sb.append("time : ");
+			sb.append(location.getTime());
+			sb.append("\nerror code : ");
+			sb.append(location.getLocType());
+			sb.append("\nlatitude : ");
+			sb.append(location.getLatitude());
+			sb.append("\nlontitude : ");
+			sb.append(location.getLongitude());
+			sb.append("\nradius : ");
+			sb.append(location.getRadius());
+			if (location.getLocType() == BDLocation.TypeGpsLocation) {
+				sb.append("\nspeed : ");
+				sb.append(location.getSpeed());
+				sb.append("\nsatellite : ");
+				sb.append(location.getSatelliteNumber());
+			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
+				sb.append("\naddr : ");
+				sb.append(location.getAddrStr());
+			}
+			mLocationPoint.setX(location.getLongitude());
+			mLocationPoint.setY(location.getLatitude());
+			Log.d("BDLocation", sb.toString());
+			Log.d("LocationPoint",
+					mLocationPoint.getX() + ";" + mLocationPoint.getY());
+		}
+
+		public void onReceivePoi(BDLocation poiLocation) {
+			if (poiLocation == null) {
+				return;
+			}
+			StringBuffer sb = new StringBuffer(256);
+			sb.append("Poi time : ");
+			sb.append(poiLocation.getTime());
+			sb.append("\nerror code : ");
+			sb.append(poiLocation.getLocType());
+			sb.append("\nlatitude : ");
+			sb.append(poiLocation.getLatitude());
+			sb.append("\nlontitude : ");
+			sb.append(poiLocation.getLongitude());
+			sb.append("\nradius : ");
+			sb.append(poiLocation.getRadius());
+			if (poiLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
+				sb.append("\naddr : ");
+				sb.append(poiLocation.getAddrStr());
+			}
+			if (poiLocation.hasPoi()) {
+				sb.append("\nPoi:");
+				sb.append(poiLocation.getPoi());
+			} else {
+				sb.append("noPoi information");
+			}
+			Log.e("BDLocation", sb.toString());
+		}
 	}
 }

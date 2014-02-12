@@ -8,9 +8,13 @@
     <string name="txtHomePlace">大庆</string>
     <string name="map_url">http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer</string>
     <string name="map_address">file:///storage/sdcard0/daqingcache/Layers</string>
-    <string name="wx_app_id">wxa174e330027cb3d2</string>
+    <string name="wx_app_id">wx4fe092cad7a35fc2</string>
     <string name="app_ok">确定</string>
     <string name="app_cancel">取消</string>
-    <string name="app_share">分享</string>
+    <string name="scenic">景点</string>
+    <string name="hotel">住宿</string>
+    <string name="rest">餐饮</string>
+    <string name="fun">购物</string>
+    <string name="baiduak">zWrPZFR0zkPG328TsHvHlWBB</string>
 
 </resources>

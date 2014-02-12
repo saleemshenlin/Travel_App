@@ -203,7 +203,7 @@ public class RouteDetailActivity extends Activity {
 		String ABSTRACT;
 	}
 
-	public class RouteListAdapter extends ArrayAdapter<Route> {
+	class RouteListAdapter extends ArrayAdapter<Route> {
 		private int resourceId;
 
 		public RouteListAdapter(Context context, int textViewResourceId,
@@ -215,16 +215,16 @@ public class RouteDetailActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Route mRoute = getItem(position);
-			LinearLayout routeListItem = new LinearLayout(getContext());
+			LinearLayout routeListLayout = new LinearLayout(getContext());
 			String inflater = Context.LAYOUT_INFLATER_SERVICE;
 			LayoutInflater vi = (LayoutInflater) getContext().getSystemService(
 					inflater);
-			vi.inflate(resourceId, routeListItem, true);
-			TextView mRouteTitle = (TextView) routeListItem
+			vi.inflate(resourceId, routeListLayout, true);
+			TextView mRouteTitle = (TextView) routeListLayout
 					.findViewById(R.id.txtRouteRowTitle);
 			// TextView mRouteAbastract = (TextView) routeListItem
 			// .findViewById(R.id.txtRouteRow);
-			ImageView mRouteImage = (ImageView) routeListItem
+			ImageView mRouteImage = (ImageView) routeListLayout
 					.findViewById(R.id.imgRouteRow);
 			mRouteTitle.setText(mRoute.NAME);
 			// mRouteAbastract.setText(mRoute.ABSTRACT);
@@ -232,7 +232,7 @@ public class RouteDetailActivity extends Activity {
 					"com.travelapp");
 			Drawable mDrawable = mResources.getDrawable(imgId);
 			mRouteImage.setImageDrawable(mDrawable);
-			return routeListItem;
+			return routeListLayout;
 		}
 	}
 

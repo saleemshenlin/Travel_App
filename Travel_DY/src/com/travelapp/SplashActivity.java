@@ -1,8 +1,10 @@
 package com.travelapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -108,6 +110,7 @@ public class SplashActivity extends Activity {
 			prbLoad.setVisibility(View.GONE);
 			Toast.makeText(SplashActivity.this, result, Toast.LENGTH_SHORT)
 					.show();
+			setGuided();
 			goHome();
 		}
 
@@ -116,10 +119,21 @@ public class SplashActivity extends Activity {
 			FileIO fileIO = new FileIO();
 			fileIO.getDateFromXML();
 			fileIO.copyJSON(TravelApplication.getContext());
-			fileIO.jSON2WKT(TravelApplication.getContext(),"poi.json");
-			fileIO.jSON2WKT(TravelApplication.getContext(),"route.json");
+			fileIO.jSON2WKT(TravelApplication.getContext(), "poi.json");
+			fileIO.jSON2WKT(TravelApplication.getContext(), "route.json");
 			return "加载完毕";
 		}
 
+	}
+
+	/**
+	 * 用于更新SharedPreferences，下次启动不用再次引导
+	 */
+	private void setGuided() {
+		SharedPreferences preferences = getSharedPreferences(
+				SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putBoolean("isFirstIn", false);
+		editor.commit();
 	}
 }
