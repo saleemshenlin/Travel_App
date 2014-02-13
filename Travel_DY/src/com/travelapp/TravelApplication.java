@@ -11,6 +11,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.BMapManager;
 import com.esri.core.geometry.Point;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class TravelApplication extends Application {
 	/**
@@ -42,6 +44,7 @@ public class TravelApplication extends Application {
 	public static Point mLocationPoint;
 	private BDLocationListener mBDListener = (BDLocationListener) new MyLocationListener();
 	private static PoiDB mPoiDB;
+	public static IWXAPI mIwxapi;
 
 	public static Context getContext() {
 		return CONTEXT;
@@ -70,6 +73,7 @@ public class TravelApplication extends Application {
 		getScreenDesplay();
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
 		initBDLocation();
+		initWX();
 	}
 
 	/**
@@ -195,6 +199,18 @@ public class TravelApplication extends Application {
 				sb.append("noPoi information");
 			}
 			Log.e("BDLocation", sb.toString());
+		}
+	}
+
+	public void initWX() {
+		mIwxapi = WXAPIFactory.createWXAPI(getApplicationContext(),
+				getApplicationContext().getString(R.string.wx_app_id), false);
+		boolean isRegist = mIwxapi.registerApp(getApplicationContext()
+				.getString(R.string.wx_app_id));
+		if (isRegist) {
+			Log.e("WX", "OK");
+		} else {
+			Log.e("WX", "Error");
 		}
 	}
 }

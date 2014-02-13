@@ -15,6 +15,9 @@
     <string name="hotel">住宿</string>
     <string name="rest">餐饮</string>
     <string name="fun">购物</string>
+    <string name="wx">微信朋友圈</string>
+    <string name="wb">新浪微博</string>
+    <string name="share">分享</string>
     <string name="baiduak">zWrPZFR0zkPG328TsHvHlWBB</string>
 
 </resources>
