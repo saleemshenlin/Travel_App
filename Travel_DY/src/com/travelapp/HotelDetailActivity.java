@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,7 +23,7 @@ public class HotelDetailActivity extends Activity {
 	private TextView mItemAbstract;
 	private ImageView mMapImageView;
 	private Cursor mItemCursor = null;
-	private PoiProvider mPoiProvider;
+	private Query mQuery;
 	private Intent mIntent;
 	private Bundle mBundle;
 	private String mPoiId;
@@ -65,7 +64,6 @@ public class HotelDetailActivity extends Activity {
 		mItemAddress = (TextView) findViewById(R.id.txtItemAddress);
 		mItemTele = (TextView) findViewById(R.id.txtItemTele);
 		mItemAbstract = (TextView) findViewById(R.id.txtItemAbstract);
-		mPoiProvider = new PoiProvider();
 		mBackImageView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -162,9 +160,8 @@ public class HotelDetailActivity extends Activity {
 	}
 
 	private void getPOI(String id) {
-		final Uri queryUri = Uri.parse(PoiProvider.CONTENT_URI.toString() + "/"
-				+ id);
-		mItemCursor = mPoiProvider.query(queryUri, null, null, null, null);
+		mQuery = new Query();
+		mItemCursor = mQuery.getPoiById(id);
 		try {
 			if (mItemCursor.moveToFirst()) {
 				mTitleTextView.setText(mItemCursor.getString(mItemCursor

@@ -50,10 +50,6 @@ public class FunListActivity extends Activity {
 	private final int[] TO = { R.id.txtRowTitle, R.id.txtRowPrice,
 			R.id.txtRowAbstract, R.id.imgPalce };
 	/**
-	 * 实例一个mPoiProvider,用于开启访问数据的入口
-	 */
-	private PoiProvider mPoiProvider;
-	/**
 	 * 实例一个Query
 	 */
 	private Query mQuery;
@@ -164,13 +160,9 @@ public class FunListActivity extends Activity {
 
 		@Override
 		protected String doInBackground(String[]... params) {
-			// TODO Auto-generated method stub
-			mPoiProvider = new PoiProvider();
 			mQuery = new Query();
 			try {
-				mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
-						mQuery.getSectionViaType(4), null,
-						mQuery.getSortOrder(PoiDB.C_ID));
+				mItemCursor = mQuery.getPoiByType(4);
 				int num = mItemCursor.getCount();
 				Log.i(TAG, "ActivityProvider cursor" + num);
 			} catch (Exception e) {

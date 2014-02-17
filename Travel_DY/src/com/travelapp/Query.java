@@ -24,6 +24,8 @@ public class Query {
 	 * 用于实例化类EventProvider
 	 */
 	private PoisProvider mPoisProvider = new PoisProvider();
+	private PoiProvider mPoiProvider = new PoiProvider();
+	private RouteProvider mRouteProvider = new RouteProvider();
 	Cursor mItemCursor = null;
 
 	/**
@@ -244,5 +246,53 @@ public class Query {
 			TravelApplication.getPoiDB().closeDatabase();
 		}
 		return mGraphic;
+	}
+
+	public Cursor getPoiByType(int type) {
+		try {
+			mItemCursor = mPoiProvider.query(PoiProvider.CONTENT_URI, null,
+					getSectionViaType(type), null, getSortOrder(PoiDB.C_ID));
+		} catch (Exception e) {
+			Log.e("Query", e.toString());
+		} finally {
+			if (mItemCursor.isClosed()) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
+		}
+		return mItemCursor;
+	}
+
+	public Cursor getPoiById(String id) {
+		final Uri queryUri = Uri.parse(PoiProvider.CONTENT_URI.toString() + "/"
+				+ id);
+		try {
+			mItemCursor = mPoiProvider.query(queryUri, null, null, null, null);
+		} catch (Exception e) {
+			Log.e("Query", e.toString());
+		} finally {
+			if (mItemCursor.isClosed()) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
+		}
+		return mItemCursor;
+	}
+
+	public Cursor getRouteById(int id) {
+		final Uri queryUri = Uri.parse(PoiProvider.CONTENT_URI.toString() + "/"
+				+ id);
+		try {
+			mItemCursor = mRouteProvider
+					.query(queryUri, null, null, null, null);
+		} catch (Exception e) {
+			Log.e("Query", e.toString());
+		} finally {
+			if (mItemCursor.isClosed()) {
+				mItemCursor.close();
+			}
+			TravelApplication.getPoiDB().closeDatabase();
+		}
+		return mItemCursor;
 	}
 }

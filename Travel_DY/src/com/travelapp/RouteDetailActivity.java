@@ -116,10 +116,7 @@ public class RouteDetailActivity extends Activity {
 
 	private String getRoute(int routeid) {
 		String mRoutePOi = null;
-		final Uri queryUri = Uri.parse(RouteProvider.CONTENT_URI.toString()
-				+ "/" + routeid);
-		RouteProvider mRouteProvider = new RouteProvider();
-		mItemCursor = mRouteProvider.query(queryUri, null, null, null, null);
+		mItemCursor = mQuery.getRouteById(routeid);
 		try {
 			if (mItemCursor.moveToFirst()) {
 				mRouteTitle.setText(mItemCursor.getString(mItemCursor
