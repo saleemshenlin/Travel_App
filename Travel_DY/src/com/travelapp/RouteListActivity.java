@@ -3,16 +3,17 @@ package com.travelapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RouteListActivity extends Activity {
-	ImageView mBackImageView;
-	TextView mTitleTextView;
-	ImageView mDayOne;
-	ImageView mDayTwe;
-	ImageView mDayMore;
+	private ImageView mBackImageView;
+	private TextView mTitleTextView;
+	private ImageView mDayOne;
+	private ImageView mDayTwe;
+	private ImageView mDayMore;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,15 @@ public class RouteListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_routelist);
 		initView();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(RouteListActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {

@@ -26,11 +26,6 @@ import com.esri.core.map.Graphic;
 
 public class FileIO {
 	/**
-	 * 定义一个标签,在LogCat内表示FileIO
-	 */
-	private static final String TAG = "FileIO";
-
-	/**
 	 * 从Data.xml获取数据存入sqlite3<br>
 	 * 具体方法如下:<br>
 	 * 1)判断时候需要导入数据 <br>
@@ -66,12 +61,12 @@ public class FileIO {
 							.trim();
 					if (tagName.equals("poi")) {
 						mStringBuffer.append(")");
-						Log.d(TAG, mStringBuffer.toString());
+						Log.d("FileIO", mStringBuffer.toString());
 						TravelApplication.getPoiDB().insertOrIgnore(
 								mContentValues, PoiDB.TABLE);
 						mStringBuffer.delete(0, mStringBuffer.length() - 1);
 					} else if (tagName.equals("Alldata")) {
-						Log.d(TAG, "end");
+						Log.d("FileIO", "end");
 					} else {
 						mStringBuffer.append(", ");
 					}
@@ -121,7 +116,7 @@ public class FileIO {
 		try {
 			files = mAssetManager.list("");
 		} catch (IOException e) {
-			Log.e(TAG, e.toString());
+			Log.e("FileIO", e.toString());
 		}
 		for (String filename : files) {
 
@@ -145,7 +140,7 @@ public class FileIO {
 					}
 				}
 			} catch (IOException e) {
-				Log.e(TAG, e.toString());
+				Log.e("FileIO", e.toString());
 			}
 		}
 
@@ -225,7 +220,7 @@ public class FileIO {
 				mFile.mkdir();
 			}
 		} catch (Exception e) {
-			Log.e(TAG, e.toString());
+			Log.e("FileIO", e.toString());
 		}
 	}
 

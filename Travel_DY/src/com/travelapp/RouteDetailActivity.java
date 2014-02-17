@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,15 @@ public class RouteDetailActivity extends Activity {
 		getRoutePoi(mPOIs);
 		initData();
 		new AddMap().execute();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(RouteDetailActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {

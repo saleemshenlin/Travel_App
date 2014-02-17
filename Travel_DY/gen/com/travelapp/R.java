@@ -129,15 +129,13 @@ public final class R {
     }
     public static final class id {
         public static final int RelListView=0x7f0a001e;
-        public static final int action_settings=0x7f0a003a;
-        public static final int btnShare=0x7f0a002e;
-        public static final int checkBox1=0x7f0a002d;
-        public static final int checkBox2=0x7f0a002c;
-        public static final int editMeg=0x7f0a0028;
+        public static final int action_settings=0x7f0a0038;
+        public static final int btnShareWB=0x7f0a002b;
+        public static final int btnShareWX=0x7f0a002c;
         public static final int gridHome=0x7f0a0015;
-        public static final int imgCallout=0x7f0a0030;
-        public static final int imgCalloutMore=0x7f0a0032;
-        public static final int imgCamera=0x7f0a0029;
+        public static final int imgCallout=0x7f0a002e;
+        public static final int imgCalloutMore=0x7f0a0030;
+        public static final int imgCamera=0x7f0a0028;
         public static final int imgDayMore=0x7f0a0026;
         public static final int imgDayOne=0x7f0a0024;
         public static final int imgDayTwe=0x7f0a0025;
@@ -150,13 +148,13 @@ public final class R {
         public static final int imgItemRoute=0x7f0a001c;
         public static final int imgItemScenic=0x7f0a0017;
         public static final int imgItemSocial=0x7f0a001d;
-        public static final int imgLeft=0x7f0a002a;
+        public static final int imgLeft=0x7f0a0029;
         public static final int imgListBack=0x7f0a0001;
         public static final int imgListMap=0x7f0a0003;
-        public static final int imgPalce=0x7f0a0035;
-        public static final int imgRight=0x7f0a002b;
-        public static final int imgRouteRow=0x7f0a0033;
-        public static final int info_wv=0x7f0a0039;
+        public static final int imgPalce=0x7f0a0033;
+        public static final int imgRight=0x7f0a002a;
+        public static final int imgRouteRow=0x7f0a0031;
+        public static final int info_wv=0x7f0a0037;
         public static final int linActionbar=0x7f0a0000;
         public static final int linContent=0x7f0a0027;
         public static final int linFunAround=0x7f0a0007;
@@ -168,12 +166,12 @@ public final class R {
         public static final int listRoute=0x7f0a0023;
         public static final int map=0x7f0a0021;
         public static final int pbLoad=0x7f0a0020;
-        public static final int prbLoadData=0x7f0a002f;
+        public static final int prbLoadData=0x7f0a002d;
         public static final int relDown=0x7f0a0014;
         public static final int relHomeView=0x7f0a0010;
         public static final int relUp=0x7f0a0011;
         public static final int scrollView1=0x7f0a0008;
-        public static final int txtCallout=0x7f0a0031;
+        public static final int txtCallout=0x7f0a002f;
         public static final int txtHomePlace=0x7f0a0012;
         public static final int txtHomeTitle=0x7f0a0013;
         public static final int txtItemAbstract=0x7f0a000f;
@@ -182,11 +180,11 @@ public final class R {
         public static final int txtItemTele=0x7f0a000e;
         public static final int txtItemTime=0x7f0a000c;
         public static final int txtListTitle=0x7f0a0002;
-        public static final int txtRouteRowTitle=0x7f0a0034;
+        public static final int txtRouteRowTitle=0x7f0a0032;
         public static final int txtRouteTitle=0x7f0a0022;
-        public static final int txtRowAbstract=0x7f0a0038;
-        public static final int txtRowPrice=0x7f0a0037;
-        public static final int txtRowTitle=0x7f0a0036;
+        public static final int txtRowAbstract=0x7f0a0036;
+        public static final int txtRowPrice=0x7f0a0035;
+        public static final int txtRowTitle=0x7f0a0034;
     }
     public static final class layout {
         public static final int activity_aroundlist=0x7f030000;
@@ -208,22 +206,31 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
-        public static final int app_cancel=0x7f070009;
+        public static final int app_cancel=0x7f07000b;
         public static final int app_name=0x7f070000;
-        public static final int app_ok=0x7f070008;
-        public static final int baiduak=0x7f070011;
-        public static final int fun=0x7f07000d;
+        public static final int app_ok=0x7f07000a;
+        public static final int baiduak=0x7f070014;
+        public static final int fun=0x7f07000f;
         public static final int hello_world=0x7f070002;
-        public static final int hotel=0x7f07000b;
+        public static final int hotel=0x7f07000d;
         public static final int map_address=0x7f070006;
         public static final int map_url=0x7f070005;
-        public static final int rest=0x7f07000c;
-        public static final int scenic=0x7f07000a;
-        public static final int share=0x7f070010;
+        public static final int redirect_url=0x7f070009;
+        public static final int rest=0x7f07000e;
+        public static final int scenic=0x7f07000c;
+        public static final int share=0x7f070012;
+        public static final int share_text=0x7f070013;
+        public static final int share_wb=0x7f070011;
+        public static final int share_wx=0x7f070010;
         public static final int txtHomePlace=0x7f070004;
         public static final int txtHomeTitle=0x7f070003;
-        public static final int wb=0x7f07000f;
-        public static final int wx=0x7f07000e;
+        public static final int wb_app_id=0x7f070008;
+        public static final int weibosdk_demo_toast_auth_canceled=0x7f070017;
+        public static final int weibosdk_demo_toast_auth_failed=0x7f070016;
+        public static final int weibosdk_demo_toast_auth_success=0x7f070015;
+        public static final int weibosdk_demo_toast_share_canceled=0x7f07001a;
+        public static final int weibosdk_demo_toast_share_failed=0x7f070019;
+        public static final int weibosdk_demo_toast_share_success=0x7f070018;
         public static final int wx_app_id=0x7f070007;
     }
     public static final class style {

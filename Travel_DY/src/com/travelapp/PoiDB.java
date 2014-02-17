@@ -10,10 +10,6 @@ import android.util.Log;
 
 public class PoiDB {
 	/**
-	 * 定义一个标签,在LogCat内表示EventData
-	 */
-	private static final String TAG = "PoiDB";
-	/**
 	 * 定义一个数据库版本
 	 */
 	static final int VERSION = 1;
@@ -66,7 +62,7 @@ public class PoiDB {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
-			Log.i(TAG, "Creating database: " + DATABASE);
+			Log.i("POIDB", "Creating database: " + DATABASE);
 			db.execSQL("create TABLE " + TABLE + "(" + C_ID
 					+ " INTEGER PRIMARY KEY," + C_NAME + " VARCHAR(128),"
 					+ C_D_NAME + " VARCHAR(128)," + C_C_ID + " VARCHAR(10),"
@@ -102,7 +98,7 @@ public class PoiDB {
 	 */
 	public PoiDB(Context context) {
 		this.dbHelper = new DbHelper(context);
-		Log.i(TAG, "initialized data");
+		Log.i("POIDB", "initialized data");
 	}
 
 	/**
@@ -122,7 +118,7 @@ public class PoiDB {
 	 *            数据匹配对
 	 */
 	public void insertOrIgnore(ContentValues values, String table) {
-		Log.d(TAG, "insert " + values);
+		Log.d("POIDB", "insert " + values);
 		SQLiteDatabase db = this.dbHelper.getWritableDatabase();
 		try {
 			db.insertWithOnConflict(table, null, values,

@@ -11,6 +11,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,11 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HotelListActivity extends Activity {
-	ImageView mBackImageView;
-	TextView mTitleTextView;
-	ImageView mMapImageView;
-	static Resources mResources;
-	Cursor mItemCursor = null;
+	private ImageView mBackImageView;
+	private TextView mTitleTextView;
+	private ImageView mMapImageView;
+	private static Resources mResources;
+	private Cursor mItemCursor = null;
 	/**
 	 * 定义一个标签,在LogCat内表示EventListFragment
 	 */
@@ -66,6 +67,15 @@ public class HotelListActivity extends Activity {
 		initView();
 		new PoiQuery().execute();
 		// new AddMap().execute();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(HotelListActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {

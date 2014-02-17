@@ -1,7 +1,10 @@
 package com.travelapp;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -9,8 +12,8 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.BMapManager;
 import com.esri.core.geometry.Point;
+import com.sina.weibo.sdk.auth.WeiboAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
@@ -42,9 +45,11 @@ public class TravelApplication extends Application {
 
 	public static LocationClient mLocationClient = null;
 	public static Point mLocationPoint;
+	public static IWXAPI mIwxapi;
+	public static WeiboAuth mWeiboAuth;
+
 	private BDLocationListener mBDListener = (BDLocationListener) new MyLocationListener();
 	private static PoiDB mPoiDB;
-	public static IWXAPI mIwxapi;
 
 	public static Context getContext() {
 		return CONTEXT;
@@ -74,6 +79,7 @@ public class TravelApplication extends Application {
 		Log.i(TAG, "LBSApplication getScreenDisplay height:" + SCREENHEIGHT);
 		initBDLocation();
 		initWX();
+		initWB();
 	}
 
 	/**
@@ -123,6 +129,30 @@ public class TravelApplication extends Application {
 
 	public static void setScreenDPI(double screenDPI) {
 		TravelApplication.SCREENDPI = screenDPI;
+	}
+
+	public static void buildExitDialog(Context context) {
+		AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+		mBuilder.setMessage("确认退出吗？");
+		mBuilder.setTitle("提示");
+		mBuilder.setPositiveButton("确认", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				System.exit(0);
+			}
+		});
+		mBuilder.setNegativeButton("取消", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+			}
+		});
+		mBuilder.create().show();
 	}
 
 	private void initBDLocation() {
@@ -202,7 +232,7 @@ public class TravelApplication extends Application {
 		}
 	}
 
-	public void initWX() {
+	private void initWX() {
 		mIwxapi = WXAPIFactory.createWXAPI(getApplicationContext(),
 				getApplicationContext().getString(R.string.wx_app_id), false);
 		boolean isRegist = mIwxapi.registerApp(getApplicationContext()
@@ -212,5 +242,11 @@ public class TravelApplication extends Application {
 		} else {
 			Log.e("WX", "Error");
 		}
+	}
+
+	private void initWB() {
+		mWeiboAuth = new WeiboAuth(getApplicationContext(),
+				getApplicationContext().getString(R.string.wb_app_id),
+				getApplicationContext().getString(R.string.redirect_url), null);
 	}
 }

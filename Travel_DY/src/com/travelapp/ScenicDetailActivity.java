@@ -8,30 +8,28 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ScenicDetailActivity extends Activity {
-	ImageView mBackImageView;
-	ImageView mItemImageView;
-	TextView mTitleTextView;
-	TextView mItemPrice;
-	TextView mItemTime;
-	TextView mItemAddress;
-	TextView mItemTele;
-	TextView mItemAbstract;
-	ImageView mMapImageView;
-	Cursor mItemCursor = null;
-	PoiProvider mPoiProvider;
-	Intent mIntent;
-	Bundle mBundle;
-	String mPoiId;
-	String mFrom;
-	RelativeLayout mRelativeLayout;
-	Resources mResources;
-	Query mQuery;
+	private ImageView mBackImageView;
+	private ImageView mItemImageView;
+	private TextView mTitleTextView;
+	private TextView mItemPrice;
+	private TextView mItemAddress;
+	private TextView mItemTime;
+	private TextView mItemTele;
+	private TextView mItemAbstract;
+	private ImageView mMapImageView;
+	private Cursor mItemCursor = null;
+	private PoiProvider mPoiProvider;
+	private Intent mIntent;
+	private Bundle mBundle;
+	private String mPoiId;
+	private String mFrom;
+	private Resources mResources;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +44,15 @@ public class ScenicDetailActivity extends Activity {
 		initView();
 		getPOI(mPoiId);
 		// new AddMap().execute();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(ScenicDetailActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {

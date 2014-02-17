@@ -12,24 +12,20 @@ public class PoisProvider extends ContentProvider {
 	/**
 	 * 定义一个"典据",与manifest中相匹配
 	 */
-	public static final String AUTHORITY = "com.travelapp.poisprovider";
+	static final String AUTHORITY = "com.travelapp.poisprovider";
 	/**
 	 * 定义一个Uri
 	 */
-	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
+	static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY
 			+ "/activity");
 	/**
 	 * 定义一个单个查询的MIME类型
 	 */
-	public static final String SINGLE_RECORD_MIME_TYPE = "vnd.android.cursor.item/vnd.com.travelapp.status";
+	static final String SINGLE_RECORD_MIME_TYPE = "vnd.android.cursor.item/vnd.com.travelapp.status";
 	/**
 	 * 定义一个多个查询的MIME类型
 	 */
-	public static final String MULTIPLE_RECORDS_MIME_TYPE = "vnd.android.cursor.dir/vnd.com.travelapp.mstatus";
-	/**
-	 * 定义一个标签,在LogCat内表示EventListActivity
-	 */
-	private static final String TAG = "PoisProvider";
+	static final String MULTIPLE_RECORDS_MIME_TYPE = "vnd.android.cursor.dir/vnd.com.travelapp.mstatus";
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -64,7 +60,7 @@ public class PoisProvider extends ContentProvider {
 				throw new RuntimeException(
 						String.format(
 								"%s: Failed to insert [%s] to [%s] for unknown reasons.",
-								TAG, values, uri)); //
+								"PoisProvider", values, uri)); //
 			} else {
 				return ContentUris.withAppendedId(uri, id); //
 			}

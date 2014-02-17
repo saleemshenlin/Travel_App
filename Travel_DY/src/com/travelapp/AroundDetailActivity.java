@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,16 +42,15 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class AroundDetailActivity extends Activity {
-	ImageView mBackImageView;
-	TextView mTitleTextView;
-	ImageView mMapImageView;
-	ListView mQueryListView;
-	ArrayList<QueryListItem> mQueryList = new ArrayList<QueryListItem>();
-	Intent mIntent;
-	Bundle mBundle;
-	Resources mResources;
-	String queryName;
-	ProgressBar mProgressBar;
+	private ImageView mBackImageView;
+	private TextView mTitleTextView;
+	private ImageView mMapImageView;
+	private ListView mQueryListView;
+	private ArrayList<QueryListItem> mQueryList = new ArrayList<QueryListItem>();
+	private Intent mIntent;
+	private Bundle mBundle;
+	private Resources mResources;
+	private ProgressBar mProgressBar;
 
 	int mPoiId;
 
@@ -61,6 +61,15 @@ public class AroundDetailActivity extends Activity {
 		setContentView(R.layout.activity_list);
 		mResources = this.getResources();
 		initView();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(AroundDetailActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {
@@ -209,7 +218,7 @@ public class AroundDetailActivity extends Activity {
 		return list;
 	}
 
-	class QueryAround extends
+	private class QueryAround extends
 			AsyncTask<String, String, ArrayList<QueryListItem>> {
 
 		@Override

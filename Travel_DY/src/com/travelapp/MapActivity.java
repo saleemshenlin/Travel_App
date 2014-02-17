@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,16 +27,16 @@ import com.esri.core.geometry.Point;
 import com.esri.core.map.Graphic;
 
 public class MapActivity extends Activity {
-	ImageView mBackImageView;
-	MapView mMap = null;
-	Query mQuery;
-	Intent mIntent;
-	Bundle mBundle;
-	GraphicsLayer mGraphicsLayer;
-	ArcGISLocalTiledLayer mLocalTiledLayer;
-	ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
-	String mFunction = "POIS";
-	int mType = 0;
+	private ImageView mBackImageView;
+	private MapView mMap = null;
+	private Query mQuery;
+	private Intent mIntent;
+	private Bundle mBundle;
+	private GraphicsLayer mGraphicsLayer;
+	private ArcGISLocalTiledLayer mLocalTiledLayer;
+	private ArcGISTiledMapServiceLayer mTiledMapServiceLayer;
+	private String mFunction = "POIS";
+	private int mType = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,15 @@ public class MapActivity extends Activity {
 		setContentView(R.layout.activity_map);
 		initView();
 		new AddMap().execute();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+			TravelApplication.buildExitDialog(MapActivity.this);
+		}
+		return false;
 	}
 
 	private void initView() {

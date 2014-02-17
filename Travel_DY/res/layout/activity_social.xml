@@ -57,24 +57,6 @@
         android:layout_below="@+id/RelListView"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:minHeight="48dp"
-            android:orientation="vertical" >
-
-            <EditText
-                android:id="@+id/editMeg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="这一刻的想法..." >
-
-                <requestFocus />
-            </EditText>
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/imgCamera"
             android:layout_width="wrap_content"
@@ -104,7 +86,6 @@
                 android:layout_gravity="right"
                 android:padding="4dp"
                 android:src="@drawable/ic_right" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -114,36 +95,20 @@
             android:layout_weight="0"
             android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnShareWB"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" >
-
-                <CheckBox
-                    android:id="@+id/checkBox2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/wx" />
-
-                <CheckBox
-                    android:id="@+id/checkBox1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/wb" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:text="@string/share_wb" />
 
             <Button
-                android:id="@+id/btnShare"
+                android:id="@+id/btnShareWX"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:text="@string/share" />
+                android:text="@string/share_wx" />
         </LinearLayout>
     </LinearLayout>
 

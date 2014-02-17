@@ -21,10 +21,6 @@ import com.esri.core.symbol.PictureMarkerSymbol;
 
 public class Query {
 	/**
-	 * 定义一个标签,在LogCat内表示EventData
-	 */
-	private static final String TAG = "Query";
-	/**
 	 * 用于实例化类EventProvider
 	 */
 	private PoisProvider mPoisProvider = new PoisProvider();
@@ -157,13 +153,13 @@ public class Query {
 				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
 						mDrawable);
 				Point mPoint = (Point) Query.wkt2Geometry(WKT);
-				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Log.d("Query", mPoint.getX() + ";" + mPoint.getY());
 				Graphic mGraphic = new Graphic(mPoint, mPictureMarkerSymbol,
 						mMap);
 				mGraphicsLayer.addGraphic(mGraphic);
 			}
 		} catch (Exception e) {
-			Log.e(TAG, e.toString());
+			Log.e("Query", e.toString());
 		} finally {
 			if (mItemCursor != null) {
 				mItemCursor.close();
@@ -197,7 +193,7 @@ public class Query {
 				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
 						mDrawable);
 				Point mPoint = (Point) Query.wkt2Geometry(WKT);
-				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Log.d("Query", mPoint.getX() + ";" + mPoint.getY());
 				Point mNewPoint = new Point(mPoint.getX(),
 						mPoint.getY() - 0.001);
 				Graphic mGraphic = new Graphic(mNewPoint, mPictureMarkerSymbol,
@@ -205,7 +201,7 @@ public class Query {
 				mGraphicsLayer.addGraphic(mGraphic);
 			}
 		} catch (Exception e) {
-			Log.e(TAG, e.toString());
+			Log.e("Query", e.toString());
 		} finally {
 			if (mItemCursor != null) {
 				mItemCursor.close();
@@ -235,12 +231,12 @@ public class Query {
 				PictureMarkerSymbol mPictureMarkerSymbol = new PictureMarkerSymbol(
 						mDrawable);
 				Point mPoint = (Point) Query.wkt2Geometry(WKT);
-				Log.d(TAG, mPoint.getX() + ";" + mPoint.getY());
+				Log.d("Query", mPoint.getX() + ";" + mPoint.getY());
 				Point mNewPoint = new Point(mPoint.getX(), mPoint.getY() + 200);
 				mGraphic = new Graphic(mNewPoint, mPictureMarkerSymbol, mMap);
 			}
 		} catch (Exception e) {
-			Log.e(TAG, e.toString());
+			Log.e("Query", e.toString());
 		} finally {
 			if (mItemCursor != null) {
 				mItemCursor.close();
